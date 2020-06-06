@@ -22,8 +22,9 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+ css: [
+  '~/assets/style/app.scss',
+],
   /*
   ** Plugins to load before mounting the App
   */
