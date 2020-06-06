@@ -1,13 +1,12 @@
-version: 2.1
+version: 2
 jobs:
-  deploy_prod: 
+  deploy_dev: 
     docker:
       - image: circleci/node:14.4.0 
     steps:
       - checkout 
       - run:
           name: Add env 
-          shell: /bin/sh
           command: |
             echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env
             echo "FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN" >> .env
@@ -16,22 +15,19 @@ jobs:
             echo "FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET" >> .env
       - run: 
           name: npm install
-          shell: /bin/sh
           command: npm i
       - run:
           name: build
-          shell: /bin/sh
           command: npm run generate
       - run:
           name: deploy to Firebase Hosting
-          shell: /bin/sh
           command: ./node_modules/.bin/firebase deploy --project=$FIREBASE_PROJECT_ID --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
 
 workflows:
-  version: 2.1
-  deploy_prod: 
+  version: 2
+  deploy_dev: 
     jobs:
-      - deploy_prod: 
-      　　filters:
+      - deploy_dev:
+          filters:
             branches:
               only: master
