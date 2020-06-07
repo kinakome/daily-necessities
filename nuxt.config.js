@@ -52,7 +52,13 @@ module.exports = {
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
   },
-
+  // fontのimport
+  modules: [['nuxt-webfontloader']],
+  webfontloader: {
+    google: {
+      families: ['Roboto:400,500,700,900']
+    }
+  },
   /*
   ** Build configuration
   */

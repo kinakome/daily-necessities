@@ -16,9 +16,11 @@
 	};
 </script>
 <style lang="scss" scoped>
+@import "~assets/style/app.scss";
+
 	main {
 		min-height: 600px;
-		background-color: #ddd;
+		background-color: $white;
 		text-align: center;
 		padding: 30px;
 	}
