@@ -52,10 +52,10 @@ header{
     &-right{
       float: right;
       padding: 13px 46px 0px 0px;
-    }
-    img{
-      width: 45.17px;
-      height: 49px;
+      img{
+        width: 45.17px;
+        height: 49px;
+      }
     }
   }
 }

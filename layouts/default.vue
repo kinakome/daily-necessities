@@ -11,8 +11,8 @@
 	import Header from "@/components/header.vue"; // headerをインポート
 	export default {
 		components: {
-      Header
-    }
+	  Header
+	}
 	};
 </script>
 <style lang="scss" scoped>

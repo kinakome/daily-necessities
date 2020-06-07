@@ -1,19 +1,33 @@
 <template>
 	<div class="header-nav">
-		<div class="header-nav-button selected">
-			<nuxt-link to="/">Daily Info</nuxt-link>
+		<div class="header-nav-button selected" @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction">
+			<transition name="component-fade" mode="out-in">
+				<nuxt-link to="/" v-if="show">Daily Info</nuxt-link>
+			</transition>
 		</div>
 		<div class="header-nav-button">
-			<nuxt-link to="/">Edit Widget</nuxt-link>
+			<nuxt-link to="/" >Edit Widget</nuxt-link>
 		</div>
 		<div class="header-nav-button">
-			<nuxt-link to="/">My Page</nuxt-link>
+			<nuxt-link to="/" >My Page</nuxt-link>
 		</div>
 	</div>
 </template>
 <script>
 	export default {
-		components: {}
+		data(){
+			return {
+				show: true
+			}
+		},
+		methods: {
+			mouseOverAction: function(){
+      	this.show = false
+			},
+			mouseLemoveAction: function(){
+				this.show = true
+			}
+		}
 	};
 </script>
 <style lang="scss" scoped>
@@ -51,5 +65,14 @@
 		background-color: $gray;
 	}
 
+}
+
+//transition
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
