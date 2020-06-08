@@ -22,8 +22,9 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+ css: [
+  '~/assets/style/app.scss',
+],
   /*
   ** Plugins to load before mounting the App
   */
@@ -51,7 +52,14 @@ module.exports = {
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
   },
-
+  // fontのimport
+  modules: [['nuxt-webfontloader']],
+  webfontloader: {
+    google: {
+      families: ['Roboto:400,500,700,900'],
+      families: ['Noto+Sans+JP:400,500,700,900']
+    }
+  },
   /*
   ** Build configuration
   */
