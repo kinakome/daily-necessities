@@ -14,14 +14,16 @@
     <HeaderNav />
   </header>
 </template>
+
 <script>
-	import HeaderNav from "@/components/headerNav.vue";
-	export default {
-		components: {
-			HeaderNav
-		}
-	};
+import HeaderNav from "@/components/headerNav.vue";
+export default {
+  components: {
+    HeaderNav
+  }
+};
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
 header{
@@ -59,5 +61,4 @@ header{
     }
   }
 }
-
 </style>

@@ -56,7 +56,8 @@ module.exports = {
   modules: [['nuxt-webfontloader']],
   webfontloader: {
     google: {
-      families: ['Roboto:400,500,700,900']
+      families: ['Roboto:400,500,700,900'],
+      families: ['Noto+Sans+JP:400,500,700,900']
     }
   },
   /*

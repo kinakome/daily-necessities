@@ -1,7 +1,7 @@
 <template>
 	<div class="header-nav">
-		<HeaderNavButton title="Daily Info" explanation="日々の情報一覧" />
-		<HeaderNavButton title="Edit Widget" explanation="表示ガジェット編集" />
+		<HeaderNavButton title="Today's Info" explanation="今日の情報一覧" />
+		<HeaderNavButton title="Edit Widget" explanation="ウィジェット編集" />
 		<HeaderNavButton title="My Page" explanation="マイページ" />
 	</div>
 </template>
