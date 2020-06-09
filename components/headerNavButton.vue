@@ -1,9 +1,9 @@
 <template>
   <div class="header-nav-button" @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction">
     <transition name="toggle" mode="out-in">
-      <nuxt-link to="/" v-if="show" key="title">{{ title }}</nuxt-link>
-      <nuxt-link to="/" v-else key="explanation" class="explanation">{{ explanation }}</nuxt-link>
-    </transition>		
+      <nuxt-link :to="url" v-if="show" key="title">{{ title }}</nuxt-link>
+      <nuxt-link :to="url" v-else key="explanation" class="explanation">{{ explanation }}</nuxt-link>
+    </transition>	
   </div>
 </template>
 
@@ -17,6 +17,10 @@ export default {
     explanation: {
       type: String,
       default: ''
+    },
+    url: {
+      type: String,
+      default: '/'
     }
   },
   data(){
@@ -47,6 +51,9 @@ export default {
   overflow: hidden;
   position: relative;
   z-index: 1;
+  a {
+    display: block;
+  }
   a:link, a:visited, a:hover, a:active {
     color: $white;
   }

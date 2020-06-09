@@ -1,14 +1,15 @@
 <template>
   <div class="container">
-        <br>
-        BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
+    aaaaaaaaaaa
+    <br>
+        aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
     <br>
   </div>
 </template>
@@ -31,6 +32,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: red;
 }
 
 .title {
