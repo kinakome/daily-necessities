@@ -1,0 +1,68 @@
+<template>
+	<div>
+		{{latitude}}
+		{{longitude}}
+	</div>
+</template>
+<script>
+
+	export default {
+		created(){
+      this.getLocation()
+    },
+		components: {
+		},
+		data(){
+			return {
+				//デフォルトは東京駅
+				latitude: 35.681236,
+				longitude: 139.767125
+			}
+		},
+		methods: {
+			getLocation () {
+				if (process.client) {
+					if (!navigator.geolocation) {
+						alert('現在地情報を取得できませんでした。')
+						return
+					}
+
+					const options = {
+						enableHighAccuracy: false,
+						timeout: 5000,
+						maximumAge: 0
+					}
+
+					navigator.geolocation.getCurrentPosition(this.success, this.error, options)
+				}
+			},
+
+			success (position) {
+				this.latitude = position.coords.latitude
+				this.longitude = position.coords.longitude
+			},
+
+			error (error) {
+				switch (error.code) {
+					case 1: //PERMISSION_DENIED
+						alert('位置情報の利用が許可されていません')
+						break
+					case 2: //POSITION_UNAVAILABLE
+						alert('現在位置が取得できませんでした')
+						break
+					case 3: //TIMEOUT
+						alert('タイムアウトになりました')
+						break
+					default:
+						alert('現在位置が取得できませんでした')
+						break
+				}
+			}
+		}
+	};
+
+</script>
+<style lang="scss" scoped>
+@import "~assets/style/app.scss";
+
+</style>

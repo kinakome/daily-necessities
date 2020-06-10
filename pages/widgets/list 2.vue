@@ -1,28 +1,28 @@
 <template>
   <div class="container">
-        <br>
-        BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
+    aaaaaaaaaaa
     <br>
-        {{ $route.path }}
-        {{ $store.state.currentPath }}
-  <TrainInfo />
+        aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>
+    {{ $route.path }}
+            {{ $store.state.currentPath }}
 
   </div>
 </template>
 
 <script>
-import TrainInfo from '~/components/widgets/trainInfo.vue'
+import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
-    TrainInfo
+    Logo
   }
 }
 </script>
