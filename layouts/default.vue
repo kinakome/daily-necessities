@@ -30,7 +30,7 @@ main {
   background-color: $white;
   text-align: center;
   padding: 30px;
-  width: 100vw;
+  // width: 100vw;
 }
 
 .page-transition-enter {

@@ -63,9 +63,10 @@ export default {
     color: $white;
   }
   .explanation{
+    padding-top: 17px;
     font-size: 23px;
     font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 500;
+    font-weight: 700;
   }
 }
 .selected{
