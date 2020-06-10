@@ -1,8 +1,8 @@
 <template>
 	<div class="header-nav">
 		<HeaderNavButton title="Today's Info" explanation="今日の情報一覧" />
-		<HeaderNavButton title="Edit Widget" explanation="ウィジェット編集" />
-		<HeaderNavButton title="My Page" explanation="マイページ" />
+		<HeaderNavButton title="Edit Widget" explanation="ウィジェット編集" url="/widgets/list"/>
+		<HeaderNavButton title="My Page" explanation="マイページ" url="/users"/>
 	</div>
 </template>
 <script>

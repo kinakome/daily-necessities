@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-        <br>
-        BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
+    aaaaaaaaaaa
     <br>
-        {{ $route.path }}
-        {{ $store.state.currentPath }}
-
+        aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>    aaaaaaaaaaa
+    <br>
+    {{ $route.path }}
+    {{ $store.state.currentPath }}
 
   </div>
 </template>
