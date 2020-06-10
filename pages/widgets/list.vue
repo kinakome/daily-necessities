@@ -11,6 +11,9 @@
     <br>    aaaaaaaaaaa
     <br>    aaaaaaaaaaa
     <br>
+    {{ $route.path }}
+    {{ $store.state.currentPath }}
+
   </div>
 </template>
 
@@ -28,11 +31,11 @@ export default {
 .container {
   margin: 0 auto;
   min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: red;
 }
 
 .title {

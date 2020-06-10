@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav-button" @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction">
+  <div @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction" @click="updatePath" :class="{selected: url==$store.state.currentPath, 'header-nav-button': true}">
     <transition name="toggle" mode="out-in">
       <nuxt-link :to="url" v-if="show" key="title">{{ title }}</nuxt-link>
       <nuxt-link :to="url" v-else key="explanation" class="explanation">{{ explanation }}</nuxt-link>
@@ -25,7 +25,7 @@ export default {
   },
   data(){
     return {
-      show: true
+      show: true,
     }
   },
   methods: {
@@ -34,6 +34,10 @@ export default {
     },
     mouseLemoveAction: function(){
       this.show = true
+    },
+    //クリック時storeのパスを上書き
+    updatePath: function(){
+      this.$store.commit('updatePath', this.url)
     }
   }
 };
@@ -47,12 +51,13 @@ export default {
   width: 33%;
   background-color: $lightGray;
   font-size: 30px;
-  padding-top: 15px;
   overflow: hidden;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   a {
+    padding-top: 15px;
     display: block;
+    height: 100%;
   }
   a:link, a:visited, a:hover, a:active {
     color: $white;
@@ -63,16 +68,18 @@ export default {
     font-weight: 500;
   }
 }
-
+.selected{
+  background-color: $gray;
+}
 //transition
 .toggle-enter-active, .toggle-leave-active {
   transition: opacity 0.2s;
-  z-index: 1;
+  z-index: 2;
 }
 
 .toggle-enter, .toggle-leave-to {
   opacity: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 //button animation
