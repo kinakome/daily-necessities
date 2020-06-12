@@ -1,7 +1,7 @@
 <template>
 	<div>
-		{{latitude}}
-		{{longitude}}
+		{{location.latitude}}
+		{{location.longitude}}
 	</div>
 </template>
 <script>
@@ -15,9 +15,10 @@
 		},
 		data(){
 			return {
-				//デフォルトは東京駅
-				latitude: 35.681236,
-				longitude: 139.767125
+				location: {
+					latitude: this.$store.state.location.latitude,
+					longitude: this.$store.state.location.longitude
+				}
 			}
 		},
 		methods: {
@@ -41,8 +42,21 @@
 			},
 
 			success (position) {
-				this.latitude = position.coords.latitude
-				this.longitude = position.coords.longitude
+				this.location = {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude
+				}
+				this.$store.commit('updateLocation', location)
+				// const baseUrl = "http://express.heartrails.com/api/json?method=getStations"
+				// const setLatitude = `&x={ $this.latitude }`
+				// const setLongitude = `&y={ $this.longitude }`
+				// const getUrl = encodeURI(baseUrl + setLatitude + setLongitude)
+				// const response =  $axios.$get(getUrl)
+				// 	.catch( error => {
+				// 		console.log("response error", error)
+				// 		return false
+				// })
+				// console.log(response)
 			},
 
 			error (error) {
@@ -60,14 +74,6 @@
 						alert('現在位置が取得できませんでした')
 						break
 				}
-			}
-		},
-		async asyncData({ app }){
-			const user = await app.$axios.$get(`https://qiita.com/api/v2/users/${route.params.id}`)
-			const items = await app.$axios.$get(`https://qiita.com/api/v2/items?query=user:${route.params.id}`)
-			return {
-				user,
-				items
 			}
 		}
 	};
