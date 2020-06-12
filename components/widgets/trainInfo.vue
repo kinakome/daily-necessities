@@ -22,7 +22,6 @@
 			}
 		},
 		methods: {
-
 			//位置情報取得メソッド
 			getLocation () {
 				if (process.client) {
@@ -47,18 +46,8 @@
 					longitude: position.coords.longitude
 				}
 				this.$store.commit('updateLocation', location)
-				// const baseUrl = "http://express.heartrails.com/api/json?method=getStations"
-				// const setLatitude = `&x={ $this.latitude }`
-				// const setLongitude = `&y={ $this.longitude }`
-				// const getUrl = encodeURI(baseUrl + setLatitude + setLongitude)
-				// const response =  $axios.$get(getUrl)
-				// 	.catch( error => {
-				// 		console.log("response error", error)
-				// 		return false
-				// })
-				// console.log(response)
+				this.$store.dispatch('updateStationAction', this.location)			
 			},
-
 			error (error) {
 				switch (error.code) {
 					case 1: //PERMISSION_DENIED
