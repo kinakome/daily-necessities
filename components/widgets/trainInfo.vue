@@ -8,6 +8,7 @@
 
 	export default {
 		created(){
+			//位置情報取得
       this.getLocation()
     },
 		components: {
@@ -20,6 +21,8 @@
 			}
 		},
 		methods: {
+
+			//位置情報取得メソッド
 			getLocation () {
 				if (process.client) {
 					if (!navigator.geolocation) {
