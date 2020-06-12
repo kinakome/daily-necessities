@@ -22,7 +22,7 @@ module.exports = {
   /*
   ** Global CSS
   */
- css: [
+  css: [
   '~/assets/style/app.scss',
 ],
   /*
@@ -59,6 +59,12 @@ module.exports = {
       families: ['Roboto:400,500,700,900'],
       families: ['Noto+Sans+JP:400,500,700,900']
     }
+  },
+  // setting axios
+  modules: [
+    '@nuxtjs/axios',
+  ],
+  axios: {
   },
   /*
   ** Build configuration
