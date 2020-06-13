@@ -1,5 +1,7 @@
 <template>
-	<div>
+	<div class="train-info">
+		<div class="train-info-header">
+		</div>
 		{{location.latitude}}
 		{{location.longitude}}
 	</div>
@@ -46,7 +48,7 @@
 					longitude: position.coords.longitude
 				}
 				this.$store.commit('updateLocation', location)
-				this.$store.dispatch('updateStationAction', this.location)			
+				// this.$store.dispatch('trainInfo/updateStationAction', this.location)			
 			},
 			error (error) {
 				switch (error.code) {
@@ -70,5 +72,13 @@
 </script>
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
+.train-info{
+	width: 100%;
+	&-header{
+		width: 100%;
+		height: 50px;
+		background-color: $black;
+	}
+}
 
 </style>
