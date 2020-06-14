@@ -37,6 +37,11 @@ export default {
     },
     //クリック時storeのパスを上書き
     updatePath: function(){
+      //クリック時にスクロールを元に戻す
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
       this.$store.commit('updatePath', this.url)
     }
   }

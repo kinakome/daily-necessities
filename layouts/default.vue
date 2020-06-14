@@ -32,11 +32,12 @@ main {
   text-align: center;
   padding: 180px 46px 30px 46px;
   z-index: -3;
+  position: relative;
 }
 
 .page-transition-enter {
   // transform: translate(-100px, 0);
-  transform: translate(0,100px);
+  transform: translate(0,200px);
   opacity: 0;
 }
 .page-transition-enter-to {
@@ -51,8 +52,7 @@ main {
 }
 .page-transition-leave-to {
   // transform: translate(100px, 0);
-    transform: translate(0,-100px);
-
+  transform: translate(0,-100px);
   opacity: 0;
 }
 .page-transition-leave-active {
