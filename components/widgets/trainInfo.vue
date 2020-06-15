@@ -26,14 +26,14 @@
 			}
 		},
 		methods: {
-			//位置情報取得メソッド
+			//近隣駅取得メソッド
 			async getStation() {
 				if (process.client) {
 					if (!navigator.geolocation) {
 						alert('現在地情報を取得できませんでした。')
 						return
 					}
-
+					//geolocation取得設定
 					const options = {
 						enableHighAccuracy: false,
 						timeout: 5000,
@@ -44,6 +44,7 @@
 					this.$store.dispatch('trainInfo/updateStationAction', this.location)
 				}
 			},
+			//geolocation
 			getPosition() {
 				return new Promise((resolve, reject) => {
 					// 現在地を取得
@@ -77,19 +78,27 @@
 					);
 				});
 			}
-		},computed: {
+		},
+		computed: {
+			//storeの駅情報が変更される度に発火
 			updateStaions() {
 				this.stations = []
 				const result = this.$store.state.trainInfo.stations
-				for (let i in result) {
-					this.stations.push(result[i])
+				//駅名の重複排除
+				const stationNames = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
+				//同じ駅名の路線を集約してハッシュを作成
+				for (let i in stationNames) {
+					var stationInfo = {
+						name: stationNames[i],
+						train: result.filter(({name}) => name === stationNames[i])
+					}
+					this.stations.push(stationInfo)
 				}
-				//同じ駅名の重複排除
+				console.log(this.stations)
 				return this.stations
 			}
 		}
 	};
-
 </script>
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
