@@ -31,7 +31,9 @@ header{
   position: fixed;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-    box-shadow: 1px 1px 1px 1px #D2D2D2;
+  box-shadow: 1px 1px 1px 1px #D2D2D2;
+  z-index: 20;
+
   .header {
     color: $white;
     height: 80px;

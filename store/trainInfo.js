@@ -4,7 +4,7 @@ import axios from 'axios'
 //現在地
 export const state = () => ({
 	stations: [{
-    name: "aaaa"
+    name: ''
   }]
 })
 
@@ -13,7 +13,6 @@ export const mutations = {
     //近隣の駅一覧の配列取得
     state.stations = res.response.station
     console.log(state.stations)
-    return state.stations
 	}
 }
 
@@ -24,7 +23,7 @@ export const actions = {
 		const setLatitude = `&x=${ location.longitude }`
 		const setLongitude = `&y=${ location.latitude }`
 		const getUrl = encodeURI(baseUrl + setLatitude + setLongitude)
-		const res = await this.$axios.$get(getUrl)
+    const res = await this.$axios.$get(getUrl)
     context.commit("updateStation", res)
   }
 }

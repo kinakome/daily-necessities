@@ -29,14 +29,14 @@ export default {
     }
   },
   methods: {
-    mouseOverAction: function(){
+    mouseOverAction() {
       this.show = false
     },
-    mouseLemoveAction: function(){
+    mouseLemoveAction() {
       this.show = true
     },
     //クリック時storeのパスを上書き
-    updatePath: function(){
+    updatePath() {
       //クリック時にスクロールを元に戻す
       window.scrollTo({
         top: 0,
@@ -59,6 +59,8 @@ export default {
   overflow: hidden;
   position: relative;
   z-index: 2;
+      box-shadow: 0 0 5px rgb(151, 151, 151);
+
   a {
     padding-top: 15px;
     display: block;

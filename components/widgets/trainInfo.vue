@@ -2,22 +2,19 @@
 	<div class="train-info">
 		<div class="train-info-header">
 		</div>
-		<!-- <ul v-for="station in stations" :key=station.name> -->
-			<!-- <li>{{station.name}}</li> -->
-    <!-- </ul> -->
+			<ul v-for="station in updateStaions" :key=station.name>
+				<li>{{station.name}}</li>
+			</ul>
 	</div>
 </template>
 <script>
 
 	export default {
 		mounted(){
-			//位置情報取得
-			this.getLocation()
+			//近隣駅情報取得
+			this.getStation()
 		},
 		components: {
-		},
-		props: {
-			// result: Array
 		},
 		data(){
 			return {
@@ -26,12 +23,11 @@
 					longitude: this.$store.state.location.longitude
 				},
 				stations: [],
-				// reset: false
 			}
 		},
 		methods: {
 			//位置情報取得メソッド
-			async getLocation () {
+			async getStation() {
 				if (process.client) {
 					if (!navigator.geolocation) {
 						alert('現在地情報を取得できませんでした。')
@@ -45,12 +41,10 @@
 					}
 
 					this.location = await this.getPosition()
-					// navigator.geolocation.getCurrentPosition(this.success, this.error, options)
-					await this.getStation()
-					console.log(this.stations)
+					this.$store.dispatch('trainInfo/updateStationAction', this.location)
 				}
 			},
-			getPosition(){
+			getPosition() {
 				return new Promise((resolve, reject) => {
 					// 現在地を取得
 					navigator.geolocation.getCurrentPosition(
@@ -82,45 +76,17 @@
 						}
 					);
 				});
-			},
-			getStation() {
-				return new Promise((resolve, reject) => {
-					// 駅一覧を取得
-					console.log(this.location)
-					// this.$store.commit('updateLocation', location)
-					this.$store.dispatch('trainInfo/updateStationAction', this.location)
-					// this.stations.push(this.$store.state.stations)
-					console.log(this.$store.state.stations)
-					resolve(location);
-				});
 			}
-			// attachments(){
-      //       if(!this.result){
-      //           this.files = [];
-      //           return this.files;
-      //       }
-
-      //       if(this.reset){
-      //           this.files = [];
-      //       }
-
-      //       const filenames = this.result;
-      //       this.reset = (this.files.length === filenames.length) ? true : false;
-
-      //       if(this.files.length === 0){
-      //           filenames.map((filename)=>{
-      //               fetch(`https://download.link/files/${filename}`, {method: "GET"})
-      //               .then((res)=>{
-      //                   if(res.ok){
-      //                       this.files.push(new File([res.blob()], filename));
-      //                   }
-      //               })
-      //               .catch(error => console.log(error));
-      //           });
-      //       }
-
-      //       return this.files;
-      //   }
+		},computed: {
+			updateStaions() {
+				this.stations = []
+				const result = this.$store.state.trainInfo.stations
+				for (let i in result) {
+					this.stations.push(result[i])
+				}
+				//同じ駅名の重複排除
+				return this.stations
+			}
 		}
 	};
 

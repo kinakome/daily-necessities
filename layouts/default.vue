@@ -31,7 +31,7 @@ main {
   background-color: $white;
   text-align: center;
   padding: 180px 46px 30px 46px;
-  z-index: -3;
+  z-index: 10;
   position: relative;
 }
 
