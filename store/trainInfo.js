@@ -12,7 +12,6 @@ export const mutations = {
 	updateStation (state, res) {
     //近隣の駅一覧の配列取得
     state.stations = res.response.station
-    console.log(state.stations)
 	}
 }
 

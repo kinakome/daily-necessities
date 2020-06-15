@@ -2,13 +2,25 @@
 	<div class="train-info">
 		<div class="train-info-header">
 		</div>
-			<ul v-for="station in updateStaions" :key=station.name>
-				<li>{{station.name}}</li>
-			</ul>
+		<div class="train-info-contents">
+			<div class="train-info-contents-left">
+				<div class="train-info-contents-left-title">現在地から近い駅</div>
+				<div class="train-info-contents-left-stations">
+					<div class="arrow-up"></div>
+					<div class="arrow-down"></div>
+					<ul>
+						<li v-for="(station, index) in updateStaions" :key=station.name :class="{'selected-station': index==1}">{{station.name}}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="train-info-contents-right">
+
+			</div>
+		</div>
 	</div>
 </template>
-<script>
 
+<script>
 	export default {
 		mounted(){
 			//近隣駅情報取得
@@ -104,10 +116,83 @@
 @import "~assets/style/app.scss";
 .train-info{
 	width: 100%;
+	height: 100%;
 	&-header{
 		width: 100%;
 		height: 50px;
 		background-color: $black;
+	}
+	&-contents{
+		width: 100%;
+		height: calc(100% - 50px);
+		font-family: 'Noto Sans JP', sans-serif;
+		font-weight: 500;
+		&-left{
+			width: 40%;
+			height: 100%;
+			float: left;
+			position: relative;
+			&-title{
+				position: absolute;
+				height: 20px;
+				width: 100%;
+				text-align: left;
+				padding:10px 0 0 10px;
+				font-size: 12px;
+				color: $gray;
+			}
+			&-stations{
+				height: 100%;
+				padding: 20px  0px;
+				position: relative;
+				ul{
+					list-style: none;
+					height: 100%;
+					li{
+						padding-top: 22px;
+						height: 30%;
+						width: 100%;
+						color: $lightGray;
+					}
+					.selected-station{
+						height: 40%;
+						background-color: $gray;
+						padding-top: 29px;
+						font-weight: 700;
+						color: $white;
+						font-size: 20px;
+					}
+				}
+				.arrow-up{
+					position: absolute;
+					top: 90px;
+					left: 15px;
+					display: inline-block;
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 0 10px 12px 10px;
+					border-color: transparent transparent #FFF transparent;
+				}
+				.arrow-down{
+					position: absolute;
+					bottom: 90px;
+					left: 15px;
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 12px 10px 0 10px;
+					border-color: #ffffff transparent transparent transparent;
+				}
+			}
+		}
+		&-right{
+			border: solid 1px $gray;
+			width: calc(60% - 10px);
+			height: calc(100% - 20px);
+			float: right;
+			margin: 10px 10px 10px 0px;
+		}
 	}
 }
 
