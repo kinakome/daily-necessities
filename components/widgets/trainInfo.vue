@@ -6,15 +6,21 @@
 			<div class="train-info-contents-left">
 				<div class="train-info-contents-left-title">現在地から近い駅</div>
 				<div class="train-info-contents-left-stations">
-					<div class="arrow-up"></div>
-					<div class="arrow-down"></div>
-					<ul>
-						<li v-for="(station, index) in updateStaions" :key=station.name :class="{'selected-station': index==1}">{{station.name}}</li>
-					</ul>
+					<div class="arrow-up" @click="selectUp"></div>
+					<div class="arrow-down" @click="selectDown"></div>
+					<div class="station-box">
+						<div class="station-box-item"></div>
+						<div class="station-box-item selected-box"></div>
+						<div class="station-box-item"></div>
+					</div>
+					<transition-group name="station-list" tag="ul">
+						<!-- <li v-for="(station, index) in updateStaions" :key=station :class="{'selected-station': index==1}">{{station.name}}</li> -->
+						<li v-for="(station, index) in updateStaions" :key=station :class="{'selected-station': index==1}">{{station}}</li>
+					</transition-group>
 				</div>
 			</div>
 			<div class="train-info-contents-right">
-
+				{{selectedStation}}
 			</div>
 		</div>
 	</div>
@@ -35,6 +41,9 @@
 					longitude: this.$store.state.location.longitude
 				},
 				stations: [],
+				stationNames: [],
+				selectedStation: "",
+				load: true
 			}
 		},
 		methods: {
@@ -89,25 +98,40 @@
 						}
 					);
 				});
+			}, 
+			selectUp(){
+				this.load = false
+				const head = this.stationNames.shift()
+				this.stationNames.push(head)
+			},
+			selectDown(){
+				this.load = false
+				const tail = this.stationNames.pop()
+				this.stationNames.unshift(tail)
 			}
 		},
 		computed: {
 			//storeの駅情報が変更される度に発火
 			updateStaions() {
-				this.stations = []
-				const result = this.$store.state.trainInfo.stations
-				//駅名の重複排除
-				const stationNames = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
-				//同じ駅名の路線を集約してハッシュを作成
-				for (let i in stationNames) {
-					var stationInfo = {
-						name: stationNames[i],
-						train: result.filter(({name}) => name === stationNames[i])
+				if(this.load){
+					this.stations = []
+					this.stationNames = []
+					const result = this.$store.state.trainInfo.stations
+					//駅名の重複排除
+					const names = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
+					//同じ駅名の路線を集約してハッシュを作成
+					for (let i in names) {
+						var stationInfo = {
+							name: names[i],
+							train: result.filter(({name}) => name === names[i])
+						}
+						this.stations.push(stationInfo)
+						this.stationNames.push(names[i])
 					}
-					this.stations.push(stationInfo)
+					// this.selectedStation = this.stations[1].train
+					console.log(this.stations)
 				}
-				console.log(this.stations)
-				return this.stations
+				return this.stationNames
 			}
 		}
 	};
@@ -145,22 +169,41 @@
 				height: 100%;
 				padding: 20px  0px;
 				position: relative;
-				ul{
-					list-style: none;
+				.station-box{
 					height: 100%;
-					li{
-						padding-top: 22px;
+					width: 100%;
+					&-item{
 						height: 30%;
 						width: 100%;
-						color: $lightGray;
 					}
-					.selected-station{
+					.selected-box{
 						height: 40%;
 						background-color: $gray;
-						padding-top: 29px;
 						font-weight: 700;
 						color: $white;
 						font-size: 20px;
+					}
+				}
+				ul{
+					list-style: none;
+					float: left;
+					position: absolute;
+					top: 30px;
+					left: 90px;
+					z-index: 30;
+					height: calc(100% - 40px );
+					li{
+						display: block;
+						color: $lightGray;
+						height: 30%;
+						padding-top: 13px;
+					}
+					.selected-station{
+						font-weight: 700;
+						color: $white;
+						font-size: 20px;
+						height: 40%;
+						padding-top: 20px;
 					}
 				}
 				.arrow-up{
@@ -183,6 +226,9 @@
 					border-style: solid;
 					border-width: 12px 10px 0 10px;
 					border-color: #ffffff transparent transparent transparent;
+				}
+				.station-list-move {
+					transition: transform 1s;
 				}
 			}
 		}
