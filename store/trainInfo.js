@@ -1,6 +1,3 @@
-import Vuex from 'vuex'
-import axios from 'axios'
-
 //現在地
 export const state = () => ({
 	stations: [{
@@ -21,8 +18,10 @@ export const actions = {
 		const baseUrl = "https://express.heartrails.com/api/json?method=getStations"
 		const setLatitude = `&x=${ location.longitude }`
 		const setLongitude = `&y=${ location.latitude }`
-		const getUrl = encodeURI(baseUrl + setLatitude + setLongitude)
+    const getUrl = encodeURI(baseUrl + setLatitude + setLongitude)
+    console.log(getUrl)
     const res = await this.$axios.$get(getUrl)
+    console.log(res)
     context.commit("updateStation", res)
   }
 }

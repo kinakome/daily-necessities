@@ -20,7 +20,15 @@
 				</div>
 			</div>
 			<div class="train-info-contents-right">
-				{{selectedStation}}
+					<transition name="station-list">
+						<ul v-if="!load">
+							<li v-for="(train, index) in selectedStation.train" :key=train.line :class="{'selected-station': index==1}">{{train.line}} {{train.distance}} </li>
+						</ul>
+						<no-ssr>
+							<vue-loading type="spin" color="#333" :size="{ width: '50px', height: '50px' }" v-show="load"></vue-loading>
+						</no-ssr>
+						<!-- <span v-if="load">近くに駅がありません</span> -->
+					</transition>
 			</div>
 		</div>
 	</div>
@@ -42,7 +50,8 @@
 				},
 				stations: [],
 				stationNames: [],
-				selectedStation: "",
+				selectedStation: {},
+				selectedIndex: 1,
 				load: true
 			}
 		},
@@ -54,12 +63,12 @@
 						alert('現在地情報を取得できませんでした。')
 						return
 					}
-					//geolocation取得設定
-					const options = {
-						enableHighAccuracy: false,
-						timeout: 5000,
-						maximumAge: 0
-					}
+					// //geolocation取得設定
+					// const options = {
+					// 	enableHighAccuracy: false,
+					// 	timeout: 5000,
+					// 	maximumAge: 0
+					// }
 
 					this.location = await this.getPosition()
 					this.$store.dispatch('trainInfo/updateStationAction', this.location)
@@ -100,22 +109,25 @@
 				});
 			}, 
 			selectUp(){
-				this.load = false
 				const head = this.stationNames.shift()
 				this.stationNames.push(head)
+				this.selectedIndex = (this.selectedIndex +1) % 3
+				this.selectedStation = this.stations[this.selectedIndex]
+				console.log(this.selectedStation)
 			},
 			selectDown(){
-				this.load = false
 				const tail = this.stationNames.pop()
 				this.stationNames.unshift(tail)
+				this.selectedIndex = this.selectedIndex >= 1 ? (this.selectedIndex - 1) % 3 : 3 + ((this.selectedIndex - 1) % 3)
+				this.selectedStation = this.stations[this.selectedIndex]
 			}
 		},
 		computed: {
 			//storeの駅情報が変更される度に発火
 			updateStaions() {
 				if(this.load){
-					this.stations = []
-					this.stationNames = []
+					let stations = []
+					let stationNames = []
 					const result = this.$store.state.trainInfo.stations
 					//駅名の重複排除
 					const names = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
@@ -125,11 +137,15 @@
 							name: names[i],
 							train: result.filter(({name}) => name === names[i])
 						}
-						this.stations.push(stationInfo)
-						this.stationNames.push(names[i])
+						stations.push(stationInfo)
+						stationNames.push(names[i])
 					}
-					// this.selectedStation = this.stations[1].train
-					console.log(this.stations)
+					this.selectedStation = stations[1]
+					//駅名が3個ならロード完了
+					this.load = stationNames.length == 3 ? false : true 
+
+					this.stations = stations
+					this.stationNames = stationNames
 				}
 				return this.stationNames
 			}
@@ -215,7 +231,11 @@
 					height: 0;
 					border-style: solid;
 					border-width: 0 10px 12px 10px;
-					border-color: transparent transparent #FFF transparent;
+					border-color: transparent transparent $white transparent;
+					&:hover{
+					border-color: transparent transparent $lightGray transparent;
+					}
+
 				}
 				.arrow-down{
 					position: absolute;
@@ -225,7 +245,10 @@
 					height: 0;
 					border-style: solid;
 					border-width: 12px 10px 0 10px;
-					border-color: #ffffff transparent transparent transparent;
+					border-color: $white transparent transparent transparent;
+					&:hover{
+						border-color: $lightGray transparent transparent transparent;
+					}
 				}
 				.station-list-move {
 					transition: transform 1s;

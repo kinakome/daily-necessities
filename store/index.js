@@ -1,6 +1,3 @@
-import Vuex from 'vuex'
-import axios from 'axios'
-
 //現在地
 export const state = () => ({
 	currentPath: '/',
