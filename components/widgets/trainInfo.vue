@@ -1,6 +1,7 @@
 <template>
 	<div class="train-info">
 		<div class="train-info-header">
+			Nearby Station
 		</div>
 		<div class="train-info-contents">
 			<div class="train-info-contents-left">
@@ -20,15 +21,13 @@
 				</div>
 			</div>
 			<div class="train-info-contents-right">
-					<transition name="station-list">
-						<ul v-if="!load">
-							<li v-for="(train, index) in selectedStation.train" :key=train.line :class="{'selected-station': index==1}">{{train.line}} {{train.distance}} </li>
-						</ul>
-						<no-ssr>
-							<vue-loading type="spin" color="#333" :size="{ width: '50px', height: '50px' }" v-show="load"></vue-loading>
-						</no-ssr>
-						<!-- <span v-if="load">近くに駅がありません</span> -->
-					</transition>
+				<ul v-if="!load">
+					<li v-for="(train, index) in selectedStation.train" :key=train.line :class="{'selected-station': index==1}">{{train.line}} {{train.distance}} </li>
+				</ul>
+				<no-ssr>
+						<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
+					</no-ssr>
+					<!-- <span v-if="load">近くに駅がありません</span> -->			
 			</div>
 		</div>
 	</div>
@@ -161,6 +160,11 @@
 		width: 100%;
 		height: 50px;
 		background-color: $black;
+		color: $white;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 700;
+		font-size: 25px;
+		padding-top: 12px;
 	}
 	&-contents{
 		width: 100%;
@@ -261,6 +265,21 @@
 			height: calc(100% - 20px);
 			float: right;
 			margin: 10px 10px 10px 0px;
+			ul{
+				list-style: none;
+				padding:10px;
+				li {
+					display: block;
+					box-shadow: 0 0 5px #D2D2D2;
+					padding: 7px;
+					width: 90%;
+					margin: 0 auto;
+					margin-bottom: 10px;
+					color: $gray;
+					overflow: scroll;
+
+				}
+			}
 		}
 	}
 }
