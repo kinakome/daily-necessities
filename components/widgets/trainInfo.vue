@@ -27,7 +27,8 @@
 				<no-ssr>
 						<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 					</no-ssr>
-					<!-- <span v-if="load">近くに駅がありません</span> -->			
+					<!-- <span v-if="load">近くに駅がありません</span> -->	
+				<div class="credit-area">©︎ HeartRails Express</div>
 			</div>
 		</div>
 	</div>
@@ -62,7 +63,7 @@
 						alert('現在地情報を取得できませんでした。')
 						return
 					}
-					
+
 					this.location = await this.getPosition()
 					this.$store.dispatch('trainInfo/updateStationAction', this.location)
 				}
@@ -258,6 +259,7 @@
 			height: calc(100% - 20px);
 			float: right;
 			margin: 10px 10px 10px 0px;
+			position: relative;
 			ul{
 				list-style: none;
 				padding:10px;
@@ -272,6 +274,13 @@
 					overflow: scroll;
 
 				}
+			}
+			.credit-area{
+				position: absolute;
+				color: $lightGray;
+				font-size: 10px;
+				bottom: 5px;
+				right: 26px;
 			}
 		}
 	}
