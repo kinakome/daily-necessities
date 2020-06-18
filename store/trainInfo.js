@@ -19,9 +19,7 @@ export const actions = {
 		const setLatitude = `&x=${ location.longitude }`
 		const setLongitude = `&y=${ location.latitude }`
     const getUrl = encodeURI(baseUrl + setLatitude + setLongitude)
-    console.log(getUrl)
     const res = await this.$axios.$get(getUrl)
-    console.log(res)
     context.commit("updateStation", res)
   }
 }

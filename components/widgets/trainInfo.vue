@@ -62,13 +62,7 @@
 						alert('現在地情報を取得できませんでした。')
 						return
 					}
-					// //geolocation取得設定
-					// const options = {
-					// 	enableHighAccuracy: false,
-					// 	timeout: 5000,
-					// 	maximumAge: 0
-					// }
-
+					
 					this.location = await this.getPosition()
 					this.$store.dispatch('trainInfo/updateStationAction', this.location)
 				}
@@ -112,7 +106,6 @@
 				this.stationNames.push(head)
 				this.selectedIndex = (this.selectedIndex +1) % 3
 				this.selectedStation = this.stations[this.selectedIndex]
-				console.log(this.selectedStation)
 			},
 			selectDown(){
 				const tail = this.stationNames.pop()
