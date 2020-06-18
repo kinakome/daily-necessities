@@ -26,15 +26,18 @@
 @import "~assets/style/app.scss";
 
 main {
+  width: calc(100% - 100px);
   min-height: 600px;
   background-color: $white;
   text-align: center;
-  padding: 30px;
-  // width: 100vw;
+  padding: 180px 46px 30px 46px;
+  z-index: 10;
+  position: relative;
 }
 
 .page-transition-enter {
-  transform: translate(-100px, 0);
+  // transform: translate(-100px, 0);
+  transform: translate(0,200px);
   opacity: 0;
 }
 .page-transition-enter-to {
@@ -48,7 +51,8 @@ main {
   opacity: 1;
 }
 .page-transition-leave-to {
-  transform: translate(100px, 0);
+  // transform: translate(100px, 0);
+  transform: translate(0,-100px);
   opacity: 0;
 }
 .page-transition-leave-active {

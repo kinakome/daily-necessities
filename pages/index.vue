@@ -1,62 +1,50 @@
 <template>
   <div class="container">
-        <br>
-        BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>    BBBBBBBB
-    <br>
-        {{ $route.path }}
-        {{ $store.state.currentPath }}
-
-
+    <!-- storeからトップ画面に表示するウィジェット名を受け取り描画 -->
+    <div v-for="(widget, index) in $store.state.widgetList" :key="index" class="widget">
+        <compnent :is=widget>
+        </compnent>
+    </div>
+    <div class="widget"></div>
+    <div class="widget"></div>
+    <div class="widget"></div>
+    <div class="widget"></div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import TrainInfo from '~/components/widgets/trainInfo.vue'
 
 export default {
   components: {
-    Logo
+    TrainInfo
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "~assets/style/app.scss";
+
 .container {
-  margin: 0 auto;
+  clear: both;
   min-height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  /* justify-content: space-between; */
+	align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin: 0 auto;
+
+  .widget {
+    width: 600px;
+    height: 280px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 5px #D2D2D2;
+  }
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
