@@ -230,6 +230,7 @@
 					border-style: solid;
 					border-width: 0 10px 12px 10px;
 					border-color: transparent transparent $white transparent;
+					transition: .3s;
 					&:hover{
 					border-color: transparent transparent $lightGray transparent;
 					}
