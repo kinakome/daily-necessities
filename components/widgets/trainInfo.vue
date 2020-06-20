@@ -26,9 +26,9 @@
 				</ul>
 				<no-ssr>
 						<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
-					</no-ssr>
-					<!-- <span v-if="load">近くに駅がありません</span> -->	
-				<div class="credit-area">©︎ HeartRails Express</div>
+				</no-ssr>
+					<!-- <span v-if="load">近くに駅がありません</span> -->
+				<div class="credit-area">©︎ HeartRails Express</div>	
 			</div>
 		</div>
 	</div>
@@ -36,18 +36,10 @@
 
 <script>
 	export default {
-		mounted(){
-			//近隣駅情報取得
-			this.getStation()
-		},
 		components: {
 		},
 		data(){
 			return {
-				location: {
-					latitude: this.$store.state.location.latitude,
-					longitude: this.$store.state.location.longitude
-				},
 				stations: [],
 				stationNames: [],
 				selectedStation: {},
@@ -56,53 +48,8 @@
 			}
 		},
 		methods: {
-			//近隣駅取得メソッド
-			async getStation() {
-				if (process.client) {
-					if (!navigator.geolocation) {
-						alert('現在地情報を取得できませんでした。')
-						return
-					}
-
-					this.location = await this.getPosition()
-					this.$store.dispatch('trainInfo/updateStationAction', this.location)
-				}
-			},
-			//geolocation
-			getPosition() {
-				return new Promise((resolve, reject) => {
-					// 現在地を取得
-					navigator.geolocation.getCurrentPosition(
-						// 取得成功した場合
-						(position) => {
-							const location = {
-								latitude: position.coords.latitude,
-								longitude: position.coords.longitude
-							}
-							resolve(location);
-						},
-						// 取得失敗した場合
-						(error) => {
-							switch (error.code) {
-								case 1: //PERMISSION_DENIED
-									alert("位置情報の利用が許可されていません");
-									break;
-								case 2: //POSITION_UNAVAILABLE
-									alert("現在位置が取得できませんでした");
-									break;
-								case 3: //TIMEOUT
-									alert("タイムアウトになりました");
-									break;
-								default:
-									alert("その他のエラー(エラーコード:" + error.code + ")");
-									break;
-							}
-							reject(error.code);
-						}
-					);
-				});
-			}, 
 			selectUp(){
+				// console.log(this.$store.getters['location'])
 				const head = this.stationNames.shift()
 				this.stationNames.push(head)
 				this.selectedIndex = (this.selectedIndex +1) % 3
@@ -118,6 +65,7 @@
 		computed: {
 			//storeの駅情報が変更される度に発火
 			updateStaions() {
+				let stations = this.$store.getters['trainInfo/station']
 				if(this.load){
 					let stations = []
 					let stationNames = []
@@ -156,7 +104,7 @@
 		background-color: $black;
 		color: $white;
 		font-family: 'Roboto', sans-serif;
-		font-weight: 700;
+		font-weight: 600;
 		font-size: 25px;
 		padding-top: 12px;
 	}
@@ -261,6 +209,7 @@
 			float: right;
 			margin: 10px 10px 10px 0px;
 			position: relative;
+			overflow: scroll;
 			ul{
 				list-style: none;
 				padding:10px;
@@ -272,17 +221,15 @@
 					margin: 0 auto;
 					margin-bottom: 10px;
 					color: $gray;
-					overflow: scroll;
-
 				}
 			}
-			.credit-area{
-				position: absolute;
-				color: $lightGray;
-				font-size: 10px;
-				bottom: 5px;
-				right: 26px;
-			}
+		}
+		.credit-area{
+			position: absolute;
+			color: $lightGray;
+			font-size: 10px;
+			bottom: 5px;
+			right: 26px;
 		}
 	}
 }

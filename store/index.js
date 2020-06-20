@@ -7,6 +7,11 @@ export const state = () => ({
 	},
 	widgetList: ["TrainInfo", "LunchLibrary"]
 })
+
+export const getters = {
+	location: state => state.location
+}
+
 //現在地書き換え
 export const mutations = {
 	//緯度経度取得

@@ -25,8 +25,7 @@
 <script>
 	export default {
 		mounted(){
-			//近隣駅情報取得
-			// this.getStation()
+
 		},
 		components: {
 		},
@@ -35,101 +34,11 @@
 				location: {
 					latitude: this.$store.state.location.latitude,
 					longitude: this.$store.state.location.longitude
-				},
-				stations: [],
-				stationNames: [],
-				selectedStation: {},
-				selectedIndex: 1,
-				load: true
+				}
 			}
 		},
 		methods: {
-			//近隣駅取得メソッド
-			async getStation() {
-				if (process.client) {
-					if (!navigator.geolocation) {
-						alert('現在地情報を取得できませんでした。')
-						return
-					}
 
-					this.location = await this.getPosition()
-					this.$store.dispatch('trainInfo/updateStationAction', this.location)
-				}
-			},
-			//geolocation
-			getPosition() {
-				return new Promise((resolve, reject) => {
-					// 現在地を取得
-					navigator.geolocation.getCurrentPosition(
-						// 取得成功した場合
-						(position) => {
-							const location = {
-								latitude: position.coords.latitude,
-								longitude: position.coords.longitude
-							}
-							resolve(location);
-						},
-						// 取得失敗した場合
-						(error) => {
-							switch (error.code) {
-								case 1: //PERMISSION_DENIED
-									alert("位置情報の利用が許可されていません");
-									break;
-								case 2: //POSITION_UNAVAILABLE
-									alert("現在位置が取得できませんでした");
-									break;
-								case 3: //TIMEOUT
-									alert("タイムアウトになりました");
-									break;
-								default:
-									alert("その他のエラー(エラーコード:" + error.code + ")");
-									break;
-							}
-							reject(error.code);
-						}
-					);
-				});
-			}, 
-			selectUp(){
-				const head = this.stationNames.shift()
-				this.stationNames.push(head)
-				this.selectedIndex = (this.selectedIndex +1) % 3
-				this.selectedStation = this.stations[this.selectedIndex]
-			},
-			selectDown(){
-				const tail = this.stationNames.pop()
-				this.stationNames.unshift(tail)
-				this.selectedIndex = this.selectedIndex >= 1 ? (this.selectedIndex - 1) % 3 : 3 + ((this.selectedIndex - 1) % 3)
-				this.selectedStation = this.stations[this.selectedIndex]
-			}
-		},
-		computed: {
-			//storeの駅情報が変更される度に発火
-			updateStaions() {
-				if(this.load){
-					let stations = []
-					let stationNames = []
-					const result = this.$store.state.trainInfo.stations
-					//駅名の重複排除
-					const names = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
-					//同じ駅名の路線を集約してハッシュを作成
-					for (let i in names) {
-						var stationInfo = {
-							name: names[i],
-							train: result.filter(({name}) => name === names[i])
-						}
-						stations.push(stationInfo)
-						stationNames.push(names[i])
-					}
-					this.selectedStation = stations[1]
-					//駅名が3個ならロード完了
-					this.load = stationNames.length == 3 ? false : true 
-
-					this.stations = stations
-					this.stationNames = stationNames
-				}
-				return this.stationNames
-			}
 		}
 	};
 </script>
@@ -144,7 +53,7 @@
 		background-color: $black;
 		color: $white;
 		font-family: 'Roboto', sans-serif;
-		font-weight: 700;
+		font-weight: 600;
 		font-size: 25px;
 		padding-top: 12px;
 	}
