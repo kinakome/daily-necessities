@@ -52,7 +52,7 @@ module.exports = {
     FIREBASE_DATABASEURL: process.env.FIREBASE_DATABASEURL,
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
-    HOTPEPPER_API_KEY: process.env.HOTPEPPER_API_KEY,
+    HOTPEPPER_API_KEY: process.env.HOTPEPPER_API_KEY
   },
   // fontのimport
   modules: [['nuxt-webfontloader']],

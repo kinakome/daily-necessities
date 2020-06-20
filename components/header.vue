@@ -30,7 +30,7 @@ header{
   width: 100%;
   position: fixed;
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   box-shadow: 1px 1px 1px 1px #D2D2D2;
   z-index: 20;
 

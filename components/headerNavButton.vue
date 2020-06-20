@@ -53,7 +53,7 @@ export default {
 .header-nav-button{
   text-align: center;
   height: 60px;
-  width: 33%;
+  width: 32.7%;
   background-color: $lightGray;
   font-size: 30px;
   overflow: hidden;
