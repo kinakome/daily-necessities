@@ -8,9 +8,7 @@
 				<div class="lunch-library-contents-top-title">現在地から近いランチ営業店</div>
         <div class="lunch-library-contents-top-distance">
           <ul>
-            <li>300m</li>
-            <li class="selected">500m</li>
-            <li>1km</li>
+            <li v-for='(range, index) in rangeList' :key=range.distance :class="{'selected': index==(selectedRange - 1)}" @click="selectRange(range)">{{range.distance}}</li>
           </ul>
         </div>
 			</div>
@@ -31,14 +29,14 @@
 		},
 		data(){
 			return {
-				location: {
-					latitude: this.$store.state.location.latitude,
-					longitude: this.$store.state.location.longitude
-				}
+        rangeList: [{distance: "300m", type: 1},{distance: "500m", type: 2},{distance: "1km", type: 3}],
+        selectedRange: 2
 			}
 		},
 		methods: {
-
+      selectRange(range){
+        this.selectedRange = range.type
+      }
 		}
 	};
 </script>
@@ -91,6 +89,7 @@
             display: inline-block;
             width: 70px;
             padding: 3px;
+            margin-left: 5px;
             box-shadow: 0 0 5px #D2D2D2;
             color: $gray;
             transition: .3s;

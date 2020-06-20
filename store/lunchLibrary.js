@@ -19,7 +19,7 @@ export const actions = {
     const setKey = `?key=${ process.env.HOTPEPPER_API_KEY }`
 		const setLongitude = `&lng=${ location.longitude }`
     const setLatitude = `&lat=${ location.latitude }`
-    const setRange = `&range=${ area }`
+    const setRange = `&range=${ range }`
     const setLunch = `&lunch=1`
     const setFormat = `&format=json`
     const setOrder = `&order=4`
