@@ -7,6 +7,7 @@
 			<div class="lunch-library-contents-top">
 				<div class="lunch-library-contents-top-title">現在地から近いランチ営業店</div>
         <div class="lunch-library-contents-top-distance">
+          <button @click="selectRight">aa</button>
           <ul>
             <li v-for='(range, index) in rangeList' :key=range.distance :class="{'selected': index==(selectedRange - 1)}" @click="selectRange(range)">{{range.distance}}</li>
           </ul>
@@ -18,7 +19,7 @@
 				</no-ssr> -->
         <!-- {{getRestaurant}} -->
       <transition-group name="station-list" tag="ul">
-        <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.name :class="{'selected-station': index==1}">{{restaurant.name}}</li>
+        <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.name :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
       </transition-group>
       </div>
       <div class="lunch-library-contents-footer">
@@ -39,7 +40,9 @@
 			return {
         rangeList: [{distance: "300m", type: 1},{distance: "500m", type: 2},{distance: "1km", type: 3}],
         selectedRange: 2,
-        load: true
+        load: true,
+        showRestaurant: [],
+        hiddenRestaurant: []
 			}
 		},
 		methods: {
@@ -51,14 +54,33 @@
           range: this.selectedRange
         }
         this.$store.dispatch('lunchLibrary/updateRestaurantAction', restaurantOption)
+      },
+      selectRight(){
+        const removeRest = this.showRestaurant.shift()
+        const showRest = this.hiddenRestaurant.shift()
+        this.hiddenRestaurant.push(removeRest)
+        this.showRestaurant.push(showRest)
+
       }
     },
     computed: {
       getRestaurant() {
-				let restaurant = this.$store.getters['lunchLibrary/restaurant']
-        console.log(restaurant)
-        this.load = false
-        return restaurant
+        const restaurant = this.$store.getters['lunchLibrary/restaurant']
+        if(this.load){
+          console.log(restaurant)
+          if(restaurant.length >= 3){
+            this.showRestaurant = restaurant.slice(0, 3)
+            this.hiddenRestaurant = restaurant.slice(3)
+          }else{
+            //あとで考える
+          }
+        }
+
+        if(restaurant.length !=0){
+          this.load = false
+        }
+        // this.load = false
+        return this.showRestaurant
       }
     }
 	};
@@ -128,12 +150,34 @@
             }
           }
         }
+        .restaurant-list-move {
+					transition: transform 1s;
+				}
       }
 		}
     &-main{
       height: 80%;
+      width: 100%;
+      overflow: scroll;
       ul{
         list-style: none;
+        float: left;
+        width: 100%;
+        li{
+          display: inline-block;
+          clear: both;
+          width: calc(30% - 20px);
+          height: 100px;
+          box-shadow: 0 0 5px #D2D2D2;
+          overflow: hidden;
+          margin: 10px;
+        }
+        .selected-restaurant{
+          height: 140px;
+          width: calc(40% - 20px);
+          border: solid 1px $gray;
+          box-shadow: 0 0 5px #D2D2D2;
+        }
       }
     }
     &-footer{
