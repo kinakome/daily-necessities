@@ -30,7 +30,11 @@
 					}
           const location = await this.getLocation()
 					this.$store.dispatch('trainInfo/updateStationAction', location)
-					this.$store.dispatch('lunchLibrary/updateStoreAction', location)
+					const storeOption = {
+						location: location,
+						range: 3
+					}
+					this.$store.dispatch('lunchLibrary/updateStoreAction', storeOption)
 				}
 			},
 			//geolocation

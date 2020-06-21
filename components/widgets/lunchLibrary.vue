@@ -14,7 +14,7 @@
 			</div>
       <div class="lunch-library-contents-main"></div>
       <div class="lunch-library-contents-footer">
-        Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a>
+        Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
       </div>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
     },
     computed: {
       getStores() {
-        
+
       }
     }
 	};

@@ -41,10 +41,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-  ],
-
-  // setting dotenv
-  modules: [
+    '@nuxtjs/proxy',
     '@nuxtjs/dotenv'
   ],
   env: {
@@ -53,7 +50,16 @@ module.exports = {
     FIREBASE_DATABASEURL: process.env.FIREBASE_DATABASEURL,
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
-    HOTPEPPER_API_KEY: process.env.HOTPEPPER_API_KEY
+    GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY
+  },
+  // cors対処
+  proxy: {
+    '/api': {
+      target: 'https://webservice.recruit.co.jp',
+      pathRewrite: {
+        '^/api' : '/'
+        }
+      }
   },
   // fontのimport
   modules: [['nuxt-webfontloader']],
@@ -68,6 +74,7 @@ module.exports = {
     '@nuxtjs/axios',
   ],
   axios: {
+    proxy: true
   },
   /*
   ** Build configuration

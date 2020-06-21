@@ -18,16 +18,15 @@ export const mutations = {
 
 export const actions = {
 	//最寄駅取得
-  async updateStoreAction (context, location, range) {
-    const baseUrl = "https://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
-    const setKey = `?key=${ process.env.HOTPEPPER_API_KEY }`
-		const setLongitude = `&lng=${ location.longitude }`
-    const setLatitude = `&lat=${ location.latitude }`
-    const setRange = `&range=${ range }`
+  async updateStoreAction (context, storeOption) {
+    const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
+    const setKey = `?keyid=${ process.env.GURUNAVI_API_KEY }`
+		const setLongitude = `&longitude=${ storeOption.location.longitude }`
+    const setLatitude = `&latitude=${ storeOption.location.latitude }`
+    const setRange = `&range=${ storeOption.range }`
     const setLunch = `&lunch=1`
-    const setFormat = `&format=jsonp`
-    const setOrder = `&order=4`
-    const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setLunch + setFormat + setOrder) 
+    const setSort = `&sort=1`
+    const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setLunch + setSort) 
     const res = await this.$axios.$get(getUrl)
     console.log(res)
     context.commit("updateStation", res)
