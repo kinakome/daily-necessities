@@ -1,8 +1,6 @@
 //現在地
 export const state = () => ({
-	stations: [{
-    name: ''
-  }]
+	stations: []
 })
 
 export const getters = {

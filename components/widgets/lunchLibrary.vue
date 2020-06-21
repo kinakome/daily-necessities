@@ -12,7 +12,15 @@
           </ul>
         </div>
 			</div>
-      <div class="lunch-library-contents-main"></div>
+      <div class="lunch-library-contents-main">
+        <!-- <no-ssr>
+          <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
+				</no-ssr> -->
+        <!-- {{getRestaurant}} -->
+      <transition-group name="station-list" tag="ul">
+        <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.name :class="{'selected-station': index==1}">{{restaurant.name}}</li>
+      </transition-group>
+      </div>
       <div class="lunch-library-contents-footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
       </div>
@@ -30,17 +38,27 @@
 		data(){
 			return {
         rangeList: [{distance: "300m", type: 1},{distance: "500m", type: 2},{distance: "1km", type: 3}],
-        selectedRange: 2
+        selectedRange: 2,
+        load: true
 			}
 		},
 		methods: {
       selectRange(range){
         this.selectedRange = range.type
+
+        const restaurantOption = {
+          location: this.$store.state.location,
+          range: this.selectedRange
+        }
+        this.$store.dispatch('lunchLibrary/updateRestaurantAction', restaurantOption)
       }
     },
     computed: {
-      getStores() {
-
+      getRestaurant() {
+				let restaurant = this.$store.getters['lunchLibrary/restaurant']
+        console.log(restaurant)
+        this.load = false
+        return restaurant
       }
     }
 	};
@@ -114,7 +132,9 @@
 		}
     &-main{
       height: 80%;
-      
+      ul{
+        list-style: none;
+      }
     }
     &-footer{
       height: 10%;

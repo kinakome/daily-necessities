@@ -15,7 +15,6 @@
 						<div class="station-box-item"></div>
 					</div>
 					<transition-group name="station-list" tag="ul">
-						<!-- <li v-for="(station, index) in updateStaions" :key=station :class="{'selected-station': index==1}">{{station.name}}</li> -->
 						<li v-for="(station, index) in updateStaions" :key=station :class="{'selected-station': index==1}">{{station}}</li>
 					</transition-group>
 				</div>
@@ -27,7 +26,6 @@
 				<no-ssr>
 						<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 				</no-ssr>
-					<!-- <span v-if="load">近くに駅がありません</span> -->
 				<div class="credit-area">©︎ HeartRails Express</div>	
 			</div>
 		</div>
