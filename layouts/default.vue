@@ -29,7 +29,8 @@
 						return
 					}
           const location = await this.getLocation()
-          this.$store.dispatch('trainInfo/updateStationAction', location)
+					this.$store.dispatch('trainInfo/updateStationAction', location)
+					this.$store.dispatch('lunchLibrary/updateStoreAction', location)
 				}
 			},
 			//geolocation

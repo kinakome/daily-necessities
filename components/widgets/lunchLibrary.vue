@@ -37,7 +37,12 @@
       selectRange(range){
         this.selectedRange = range.type
       }
-		}
+    },
+    computed: {
+      getStores() {
+        
+      }
+    }
 	};
 </script>
 <style lang="scss" scoped>
