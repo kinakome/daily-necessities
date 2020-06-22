@@ -18,8 +18,8 @@
           <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 				</no-ssr> -->
         <!-- {{getRestaurant}} -->
-      <transition-group name="station-list" tag="ul">
-        <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.name :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
+      <transition-group name="restaurant-list" tag="ul">
+        <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
       </transition-group>
       </div>
       <div class="lunch-library-contents-footer">
@@ -56,11 +56,11 @@
         this.$store.dispatch('lunchLibrary/updateRestaurantAction', restaurantOption)
       },
       selectRight(){
-        const removeRest = this.showRestaurant.shift()
         const showRest = this.hiddenRestaurant.shift()
-        this.hiddenRestaurant.push(removeRest)
+        const removeRest = this.showRestaurant.shift()
         this.showRestaurant.push(showRest)
-
+        console.log(this.showRestaurant)
+        this.hiddenRestaurant.push(removeRest)
       }
     },
     computed: {
@@ -175,7 +175,7 @@
         .selected-restaurant{
           height: 140px;
           width: calc(40% - 20px);
-          border: solid 1px $gray;
+          // border: solid 1px $gray;
           box-shadow: 0 0 5px #D2D2D2;
         }
       }
