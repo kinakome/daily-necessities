@@ -52,15 +52,6 @@ module.exports = {
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
     GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY
   },
-  // cors対処
-  proxy: {
-    '/api': {
-      target: 'https://webservice.recruit.co.jp',
-      pathRewrite: {
-        '^/api' : '/'
-        }
-      }
-  },
   // fontのimport
   modules: [['nuxt-webfontloader']],
   webfontloader: {
@@ -74,7 +65,6 @@ module.exports = {
     '@nuxtjs/axios',
   ],
   axios: {
-    proxy: true
   },
   /*
   ** Build configuration
@@ -83,6 +73,15 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    
+    babel: {
+      presets({ isServer }) {
+        const targets = isServer ? { node: 'current' } : { ie: 11 }
+        return [
+          [require.resolve('@nuxt/babel-preset-app'), { targets }]
+        ]
+      }
+    },
     extend (config, ctx) {
     }
   }

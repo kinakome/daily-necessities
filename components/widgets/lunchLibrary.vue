@@ -18,9 +18,9 @@
           <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 				</no-ssr> -->
         <!-- {{getRestaurant}} -->
-      <transition-group name="restaurant-list" tag="ul">
-        <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
-      </transition-group>
+        <transition-group name="restaurant-list" tag="ul">
+          <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
+        </transition-group>
       </div>
       <div class="lunch-library-contents-footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
@@ -150,19 +150,18 @@
             }
           }
         }
-        .restaurant-list-move {
-					transition: transform 1s;
-				}
       }
 		}
     &-main{
       height: 80%;
       width: 100%;
       overflow: scroll;
+      position: relative;
       ul{
         list-style: none;
         float: left;
         width: 100%;
+        position: absolute;
         li{
           display: inline-block;
           clear: both;
@@ -178,6 +177,9 @@
           // border: solid 1px $gray;
           box-shadow: 0 0 5px #D2D2D2;
         }
+      }
+      .restaurant-list-move {
+        transition: transform 1s;
       }
     }
     &-footer{
