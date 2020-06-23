@@ -156,30 +156,81 @@
       height: 80%;
       width: 100%;
       overflow: scroll;
-      position: relative;
       ul{
         list-style: none;
         float: left;
         width: 100%;
-        position: absolute;
+        height: 100%;
+        position: relative;
         li{
-          display: inline-block;
+          display: block;
+          top: 10px;
           clear: both;
           width: calc(30% - 20px);
           height: 100px;
           box-shadow: 0 0 5px #D2D2D2;
           overflow: hidden;
           margin: 10px;
+          position: absolute;
+          &:first-child{
+            top: 10px;
+            left: 0px;
+          }
+          &:last-child{
+            top: 10px;
+            right: 0px;        
+          }
         }
         .selected-restaurant{
           height: 140px;
           width: calc(40% - 20px);
           // border: solid 1px $gray;
           box-shadow: 0 0 5px #D2D2D2;
+          top: 10px;
+          right: 174px; 
         }
-      }
-      .restaurant-list-move {
-        transition: transform 1s;
+        .restaurant-list{
+          &-enter{
+            &-active{
+              opacity: 0;
+              // transition: opacity 0.7s, transform 0.7s;
+              transition: opacity 0.7s;
+              position: absolute;
+              animation: showAnime 0.9s;
+            }
+            &-to{
+              opacity: 1;
+              // transform: translate3d(0, -30px, 0);
+            }
+          }
+
+          &-leave{
+            &-active{
+              // position: absolute;
+              transition: opacity 0.4s, transform 0.4s;
+            }
+            &-to{
+              opacity: 0;
+              transform: translate3d(0, -20px, 0);
+            }
+          }
+
+          &-move{
+            transition: transform 0.7s;
+            // animation: moveAnime 0.9s;
+          }
+        }
+        @keyframes showAnime {
+          0% {transform: scale(0);}
+          40% {transform: scale(0);}
+          50% {transform: scale(1.07);}
+          100% {transform: scale(1);}
+        }
+        // @keyframes moveAnime {
+        //   0% {transform: scale(1);}
+        //   50% {transform: scale(1.05);}
+        //   100% {transform: scale(1.1);}
+        // }
       }
     }
     &-footer{
