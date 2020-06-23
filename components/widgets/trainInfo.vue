@@ -213,12 +213,12 @@
 				padding:10px;
 				li {
 					display: block;
-					box-shadow: 0 0 5px #D2D2D2;
+					box-shadow: 0 0 5px $lightGray;
 					padding: 7px;
 					width: 90%;
 					margin: 0 auto;
 					margin-bottom: 10px;
-					color: $gray;
+					color: $baseBlack;
 				}
 			}
 		}

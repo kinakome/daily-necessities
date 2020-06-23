@@ -6,17 +6,18 @@
 		<div class="lunch-library-contents">
 			<div class="lunch-library-contents-top">
 				<div class="lunch-library-contents-top-title">現在地から近いランチ営業店</div>
-        <div class="lunch-library-contents-top-distance">
-          <button @click="selectRight">aa</button>
+        <div class="arrow-left" @click="selectLeft"></div>
+        <div class="arrow-right" @click="selectRight"></div>
+        <div class="lunch-library-contents-top-distance">        
           <ul>
             <li v-for='(range, index) in rangeList' :key=range.distance :class="{'selected': index==(selectedRange - 1)}" @click="selectRange(range)">{{range.distance}}</li>
           </ul>
         </div>
 			</div>
       <div class="lunch-library-contents-main">
-        <!-- <no-ssr>
+        <no-ssr>
           <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
-				</no-ssr> -->
+				</no-ssr>
         <!-- {{getRestaurant}} -->
         <transition-group name="restaurant-list" tag="ul">
           <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
@@ -55,12 +56,19 @@
         }
         this.$store.dispatch('lunchLibrary/updateRestaurantAction', restaurantOption)
       },
-      selectRight(){
+      selectLeft(){
         const showRest = this.hiddenRestaurant.shift()
         const removeRest = this.showRestaurant.shift()
         this.showRestaurant.push(showRest)
         console.log(this.showRestaurant)
         this.hiddenRestaurant.push(removeRest)
+      },
+      selectRight(){
+        const showRest = this.hiddenRestaurant.pop()
+        this.showRestaurant.unshift(showRest)
+        const removeRest = this.showRestaurant.pop()
+        console.log(this.showRestaurant)
+        this.hiddenRestaurant.unshift(removeRest)
       }
     },
     computed: {
@@ -121,9 +129,39 @@
 				font-size: 12px;
         color: $gray;
         float: left;
-			}
+      }
+      .arrow{
+        &-left{
+          position: absolute;
+          top: 2px;
+          left: 260px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 7px 20px 7px 0;
+          border-color: transparent $gray transparent transparent;
+          transition: .3s;
+          &:hover{
+            border-color: transparent $lightGray transparent transparent;
+          }
+        }
+        &-right{
+          position: absolute;
+          top: 2px;
+          left: 290px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 7px 0 7px 20px;
+          border-color: transparent transparent transparent $gray;
+          transition: .3s;
+          &:hover{
+            border-color: transparent transparent transparent $lightGray;
+          }
+        }
+      }
       &-distance{
-        width: 60%;
+        width: 50%;
         float: right;
         ul{
           list-style: none;
@@ -135,7 +173,7 @@
             width: 70px;
             padding: 3px;
             margin-left: 5px;
-            box-shadow: 0 0 5px #D2D2D2;
+            box-shadow: 0 0 5px $lightGray;
             color: $gray;
             transition: .3s;
             &:hover{
@@ -164,20 +202,21 @@
         position: relative;
         li{
           display: block;
-          top: 10px;
+          top: 0px;
           clear: both;
           width: calc(30% - 20px);
           height: 100px;
-          box-shadow: 0 0 5px #D2D2D2;
+          box-shadow: 0 0 5px $lightGray;
           overflow: hidden;
           margin: 10px;
           position: absolute;
+          color: $baseBlack;
           &:first-child{
-            top: 10px;
+            top: 0px;
             left: 0px;
           }
           &:last-child{
-            top: 10px;
+            top: 0px;
             right: 0px;        
           }
         }
@@ -185,8 +224,8 @@
           height: 140px;
           width: calc(40% - 20px);
           // border: solid 1px $gray;
-          box-shadow: 0 0 5px #D2D2D2;
-          top: 10px;
+          box-shadow: 0 0 5px $lightGray;
+          top: 0px;
           right: 174px; 
         }
         .restaurant-list{
@@ -196,7 +235,7 @@
               // transition: opacity 0.7s, transform 0.7s;
               transition: opacity 0.7s;
               position: absolute;
-              animation: showAnime 0.9s;
+              animation: showAnime 0.8s;
             }
             &-to{
               opacity: 1;
@@ -223,7 +262,7 @@
         @keyframes showAnime {
           0% {transform: scale(0);}
           40% {transform: scale(0);}
-          50% {transform: scale(1.07);}
+          80% {transform: scale(1.07);}
           100% {transform: scale(1);}
         }
         // @keyframes moveAnime {
