@@ -20,7 +20,13 @@
 				</no-ssr>
         <!-- {{getRestaurant}} -->
         <transition-group name="restaurant-list" tag="ul">
-          <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">{{restaurant.name}}</li>
+          <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">
+            <div class="restaurant-box">
+              <img src="@/assets/img/no-image.svg" v-if='index == 1 && restaurant.image_url.shop_image1 == ""'>
+              <img :src=restaurant.image_url.shop_image1 v-else-if="index == 1">
+              <div class="restaurant-box-name">{{restaurant.name}}</div>
+            </div>
+          </li>
         </transition-group>
       </div>
       <div class="lunch-library-contents-footer">
@@ -55,6 +61,7 @@
           range: this.selectedRange
         }
         this.$store.dispatch('lunchLibrary/updateRestaurantAction', restaurantOption)
+        this.load = true
       },
       selectLeft(){
         const showRest = this.hiddenRestaurant.shift()
@@ -227,6 +234,31 @@
           box-shadow: 0 0 5px $lightGray;
           top: 0px;
           right: 174px; 
+          padding-top: 5px;
+        }
+        .restaurant-box{
+          height: 100%;
+          width: 100%;
+          position: relative;
+          color: $white;
+          font-size: 13px;
+          img{
+            margin-left: 46px;
+            display: block;
+            height: 120px;
+            width: 120px;
+            box-shadow: 0 0 5px $lightGray;
+          }
+          &-name{
+            padding: 3px;
+            height: 50px;
+            background-color: $baseBlack;
+            opacity: 0.8;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+
+          }
         }
         .restaurant-list{
           &-enter{
