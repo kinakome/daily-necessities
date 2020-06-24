@@ -22,9 +22,10 @@
         <transition-group name="restaurant-list" tag="ul">
           <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">
             <div class="restaurant-box">
-              <img src="@/assets/img/no-image.svg" v-if='index == 1 && restaurant.image_url.shop_image1 == ""'>
-              <img :src=restaurant.image_url.shop_image1 v-else-if="index == 1">
-              <div class="restaurant-box-name">{{restaurant.name}}</div>
+              <img src="@/assets/img/no-image.svg" :class="{'selected-image': index==1}" v-if='restaurant.image_url.shop_image1 == ""'>
+              <img :src=restaurant.image_url.shop_image1 :class="{'selected-image': index==1}" v-else>
+              <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>{{restaurant.name}}</div>
+              <div class="restaurant-box-info" v-else>{{restaurant.name}}</div>
             </div>
           </li>
         </transition-group>
@@ -218,6 +219,7 @@
           margin: 10px;
           position: absolute;
           color: $baseBlack;
+          padding-top: 5px;
           &:first-child{
             top: 0px;
             left: 0px;
@@ -227,29 +229,24 @@
             right: 0px;        
           }
         }
-        .selected-restaurant{
-          height: 140px;
-          width: calc(40% - 20px);
-          // border: solid 1px $gray;
-          box-shadow: 0 0 5px $lightGray;
-          top: 0px;
-          right: 174px; 
-          padding-top: 5px;
-        }
         .restaurant-box{
           height: 100%;
           width: 100%;
           position: relative;
           color: $white;
-          font-size: 13px;
           img{
-            margin-left: 46px;
+            margin-left: 38px;
             display: block;
-            height: 120px;
-            width: 120px;
+            height: 80px;
+            width: 80px;
             box-shadow: 0 0 5px $lightGray;
           }
-          &-name{
+          .selected-image{
+            height: 120px;
+            width: 120px;
+            margin-left: 46px;
+          }
+          &-info{
             padding: 3px;
             height: 50px;
             background-color: $baseBlack;
@@ -257,8 +254,20 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-
+            font-size: 12px;
+            &__selected{
+              height: 100px;
+              opacity: 0.8;            
+            }
           }
+        }
+        .selected-restaurant{
+          height: 150px;
+          width: calc(40% - 20px);
+          // border: solid 1px $gray;
+          box-shadow: 0 0 5px $lightGray;
+          top: 0px;
+          right: 174px; 
         }
         .restaurant-list{
           &-enter{
