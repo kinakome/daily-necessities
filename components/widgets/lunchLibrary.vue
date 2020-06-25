@@ -24,7 +24,12 @@
             <div class="restaurant-box">
               <img src="@/assets/img/no-image.svg" :class="{'selected-image': index==1}" v-if='restaurant.image_url.shop_image1 == ""'>
               <img :src=restaurant.image_url.shop_image1 :class="{'selected-image': index==1}" v-else>
-              <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>{{restaurant.name}}</div>
+              <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>
+                {{restaurant.name}}
+                <a :href=restaurant.url target="_blank">ぐるなびで開く</a>
+                {{restaurant.opentime}}
+                {{restaurant.lunch}}円
+                </div>
               <div class="restaurant-box-info" v-else>{{restaurant.name}}</div>
             </div>
           </li>
@@ -256,8 +261,7 @@
             width: 100%;
             font-size: 12px;
             &__selected{
-              height: 100px;
-              opacity: 0.8;            
+              height: 100px;            
             }
           }
         }
