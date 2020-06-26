@@ -47,7 +47,6 @@
 		},
 		methods: {
 			selectUp(){
-				// console.log(this.$store.getters['location'])
 				const head = this.stationNames.shift()
 				this.stationNames.push(head)
 				this.selectedIndex = (this.selectedIndex +1) % 3

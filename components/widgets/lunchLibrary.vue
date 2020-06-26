@@ -18,7 +18,6 @@
         <no-ssr>
           <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 				</no-ssr>
-        <!-- {{getRestaurant}} -->
         <transition-group name="restaurant-list" tag="ul">
           <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">
             <div class="restaurant-box">
@@ -44,11 +43,6 @@
 
 <script>
 	export default {
-		mounted(){
-
-		},
-		components: {
-		},
 		data(){
 			return {
         rangeList: [{distance: "300m", type: 1},{distance: "500m", type: 2},{distance: "1km", type: 3}],
@@ -73,14 +67,12 @@
         const showRest = this.hiddenRestaurant.shift()
         const removeRest = this.showRestaurant.shift()
         this.showRestaurant.push(showRest)
-        console.log(this.showRestaurant)
         this.hiddenRestaurant.push(removeRest)
       },
       selectRight(){
         const showRest = this.hiddenRestaurant.pop()
         this.showRestaurant.unshift(showRest)
         const removeRest = this.showRestaurant.pop()
-        console.log(this.showRestaurant)
         this.hiddenRestaurant.unshift(removeRest)
       }
     },
@@ -88,7 +80,6 @@
       getRestaurant() {
         const restaurant = this.$store.getters['lunchLibrary/restaurant']
         if(this.load){
-          console.log(restaurant)
           if(restaurant.length >= 3){
             this.showRestaurant = restaurant.slice(0, 3)
             this.hiddenRestaurant = restaurant.slice(3)
@@ -106,6 +97,7 @@
     }
 	};
 </script>
+
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
 .lunch-library{
@@ -134,9 +126,7 @@
 			float: left;
 			position: relative;
       @include clearfix;
-      // float: left;
 			&-title{
-				// height: 20px;
 				width: calc(30%);
 				text-align: left;
 				font-size: 12px;
@@ -329,7 +319,6 @@
               // transform: translate3d(0, -30px, 0);
             }
           }
-
           &-leave{
             &-active{
               // position: absolute;
@@ -340,7 +329,6 @@
               transform: translate3d(0, -20px, 0);
             }
           }
-
           &-move{
             transition: transform 0.7s;
             // animation: moveAnime 0.9s;

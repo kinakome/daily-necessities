@@ -9,13 +9,13 @@ export const getters = {
 
 export const mutations = {
 	updateRestaurant (state, res) {
-    //近隣の駅一覧の配列取得
+    //近隣のランチ店一覧の配列取得
     state.restaurant = res.rest
 	}
 }
 
 export const actions = {
-	//最寄駅取得
+	//最寄ランチ取得
   async updateRestaurantAction (context, storeOption) {
     const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     const setKey = `?keyid=${ process.env.GURUNAVI_API_KEY }`
