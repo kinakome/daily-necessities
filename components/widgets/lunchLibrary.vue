@@ -25,11 +25,11 @@
               <img src="@/assets/img/no-image.svg" :class="{'selected-image': index==1}" v-if='restaurant.image_url.shop_image1 == ""'>
               <img :src=restaurant.image_url.shop_image1 :class="{'selected-image': index==1}" v-else>
               <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>
-                {{restaurant.name}}
+                <span id="restaurant-name">{{restaurant.name}}</span>
+                <span id="opentime">営業時間：{{restaurant.opentime}}</span>
+                <span id="lunch-price" v-if='restaurant.lunch!=""'>ランチ価格：{{restaurant.lunch}}円程度</span>
                 <a :href=restaurant.url target="_blank">ぐるなびで開く</a>
-                {{restaurant.opentime}}
-                {{restaurant.lunch}}円
-                </div>
+              </div>
               <div class="restaurant-box-info" v-else>{{restaurant.name}}</div>
             </div>
           </li>
@@ -261,7 +261,49 @@
             width: 100%;
             font-size: 12px;
             &__selected{
-              height: 100px;            
+              height: 100px;
+              #restaurant-name{
+                display: block;
+                height: 18%;
+                overflow: hidden;
+                border-bottom: solid $white 1px;
+                padding-bottom: 2px;
+                margin-bottom: 4px;
+                white-space: nowrap;
+              }
+              #opentime{
+                display: block;
+                max-height: 34%;
+                overflow: hidden;
+                font-size: 11px;
+                margin-bottom: 5px;
+                text-align: left;
+              } 
+              a{
+                display: inline-block;
+                max-height: 20%;
+                font-size: 11px;
+                overflow: hidden;
+                color: $white;
+                padding: 3px;
+                border: solid $white 1px;
+                border-radius: 2px;
+                position: absolute;
+                bottom: 5px;
+                left: 63px;
+                transition: .2s;
+                &:hover{
+                  background-color: $gray;
+                }
+              }
+              #lunch-price{
+                display: block;
+                max-height: 20%;
+                overflow: hidden;
+                font-size: 11px;
+                margin-bottom: 3px;
+                text-align: left;
+              }   
             }
           }
         }
