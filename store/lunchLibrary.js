@@ -23,8 +23,8 @@ export const actions = {
     const setLatitude = `&latitude=${ storeOption.location.latitude }`
     const setRange = `&range=${ storeOption.range }`
     const setLunch = `&lunch=1`
-    const setSort = `&sort=2`
-    const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setLunch + setSort) 
+    const setHit = `&hit_per_page=100`
+    const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setLunch + setHit) 
     const res = await this.$axios.$get(getUrl)
     context.commit("updateRestaurant", res)
   }
