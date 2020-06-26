@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -40,10 +41,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-  ],
-
-  // setting dotenv
-  modules: [
+    '@nuxtjs/proxy',
     '@nuxtjs/dotenv'
   ],
   env: {
@@ -52,6 +50,7 @@ module.exports = {
     FIREBASE_DATABASEURL: process.env.FIREBASE_DATABASEURL,
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
+    GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY
   },
   // fontのimport
   modules: [['nuxt-webfontloader']],
@@ -74,6 +73,15 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    
+    babel: {
+      presets({ isServer }) {
+        const targets = isServer ? { node: 'current' } : { ie: 11 }
+        return [
+          [require.resolve('@nuxt/babel-preset-app'), { targets }]
+        ]
+      }
+    },
     extend (config, ctx) {
     }
   }

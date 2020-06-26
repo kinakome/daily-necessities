@@ -14,10 +14,12 @@
 
 <script>
 import TrainInfo from '~/components/widgets/trainInfo.vue'
+import LunchLibrary from '~/components/widgets/LunchLibrary.vue'
 
 export default {
   components: {
-    TrainInfo
+    TrainInfo,
+    LunchLibrary
   }
 }
 </script>

@@ -5,8 +5,13 @@ export const state = () => ({
 		latitude: 35.681236,
 		longitude: 139.767125
 	},
-	widgetList: ["TrainInfo"]
+	widgetList: ["TrainInfo", "LunchLibrary"]
 })
+
+export const getters = {
+	location: state => state.location
+}
+
 //現在地書き換え
 export const mutations = {
 	//緯度経度取得
