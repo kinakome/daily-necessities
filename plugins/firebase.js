@@ -3,7 +3,7 @@ import 'firebase/database'
 import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/storage'
- 
+
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -11,9 +11,9 @@ const config = {
   projectId: process.env.FIREBASE_PROJECTID,
   storageBucket: process.env.FIREBASE_STORAGEBUCKET
 }
- 
+
 if (firebase.apps.length === 0) {
   firebase.initializeApp(config)
 }
- 
+
 export default firebase

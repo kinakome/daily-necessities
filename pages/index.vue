@@ -14,7 +14,7 @@
 
 <script>
 import TrainInfo from '~/components/widgets/trainInfo.vue'
-import LunchLibrary from '~/components/widgets/LunchLibrary.vue'
+import LunchLibrary from '~/components/widgets/lunchLibrary.vue'
 
 export default {
   components: {
