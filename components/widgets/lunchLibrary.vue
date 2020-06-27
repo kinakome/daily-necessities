@@ -15,9 +15,9 @@
         </div>
 			</div>
       <div class="lunch-library-contents-main">
-        <no-ssr>
+        <!-- <no-ssr>
           <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
-				</no-ssr>
+				</no-ssr> -->
         <transition-group name="restaurant-list" tag="ul">
           <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">
             <div class="restaurant-box">
