@@ -16,6 +16,10 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  router: {
+    middleware: ['authenticated']
+  },
+  plugins: ["@/plugins/firebase"],
   /*
   ** Customize the progress-bar color
   */
@@ -25,6 +29,7 @@ module.exports = {
   */
   css: [
   '~/assets/style/app.scss',
+  'firebaseui/dist/firebaseui.css'
 ],
   /*
   ** Plugins to load before mounting the App
