@@ -23,7 +23,6 @@ export const actions = {
   nuxtClientInit ( commit, state, dispatch ){
     if (localStorage.accessToken && token == "") {
       commit('setToken', localStorage.token)
-      console.log("aaa")
     }
   }
 }

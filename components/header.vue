@@ -8,7 +8,7 @@
         <span>Daily necessities !</span>
       </div>
       <div class="header-right">
-        <img src="@/assets/img/login.svg">
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" ></nuxt-link>
       </div>
     </div>
     <HeaderNav />
@@ -20,6 +20,11 @@ import HeaderNav from "@/components/headerNav.vue";
 export default {
   components: {
     HeaderNav
+  },
+  data() {
+    return {
+      loginUrl: '/signIn',
+    }
   }
 };
 </script>
