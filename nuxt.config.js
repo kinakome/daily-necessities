@@ -83,7 +83,9 @@ module.exports = {
       presets({ isServer }) {
         const targets = isServer ? { node: 'current' } : { ie: 11 }
         return [
-          [require.resolve('@nuxt/babel-preset-app'), { targets }]
+          [
+            require.resolve('@nuxt/babel-preset-app'), { targets },
+          ]
         ]
       }
     },

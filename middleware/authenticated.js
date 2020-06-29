@@ -5,7 +5,7 @@ export default function ({ route, store, redirect }) {
     if (user) {
       store.dispatch("auth/gotUser", user)
     } else {
-      if(route.name !== "login") redirect("/login")
+      // if(route.name !== "login") redirect("/login")
     }
   })
 }

@@ -15,7 +15,8 @@
     //初回ロード時storeのパスを更新
     mounted(){
       this.$store.commit('updatePath', this.$route.path)
-      this.getStation()
+			this.getStation()
+			this.$store.dispatch('authenticated/nuxtClientInit')
     },
 		components: {
       Header

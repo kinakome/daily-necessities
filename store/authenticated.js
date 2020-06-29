@@ -2,7 +2,8 @@ import { auth } from '~/plugins/firebase'
 
 export const state = () => ({
   status: "",
-  token: localStorage.getItem('token') || '',
+  token: "",
+  // localStorage.getItem('token') || ''
   username: ""
 })
 
@@ -18,7 +19,13 @@ export const actions = {
       auth.signOut().then(() => {
         commit("logout")
       })
+  },
+  nuxtClientInit ( commit, state, dispatch ){
+    if (localStorage.accessToken && token == "") {
+      commit('setToken', localStorage.token)
+      console.log("aaa")
     }
+  }
 }
 
 export const mutations = {
@@ -29,5 +36,8 @@ export const mutations = {
   logout(state) {
     state.status = "loggedOut"
     state.username = ""
+  },
+  setToken(state, token) {
+    state.token = token
   }
 }
