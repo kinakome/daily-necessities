@@ -16,6 +16,10 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  router: {
+    middleware: ['authenticated']
+  },
+  plugins: ["@/plugins/firebase"],
   /*
   ** Customize the progress-bar color
   */
@@ -25,6 +29,7 @@ module.exports = {
   */
   css: [
   '~/assets/style/app.scss',
+  'firebaseui/dist/firebaseui.css'
 ],
   /*
   ** Plugins to load before mounting the App
@@ -78,7 +83,9 @@ module.exports = {
       presets({ isServer }) {
         const targets = isServer ? { node: 'current' } : { ie: 11 }
         return [
-          [require.resolve('@nuxt/babel-preset-app'), { targets }]
+          [
+            require.resolve('@nuxt/babel-preset-app'), { targets },
+          ]
         ]
       }
     },
