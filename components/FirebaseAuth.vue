@@ -15,9 +15,9 @@ export default {
 
         const config = {
           signInOptions: [
-            authProviders.Email,
+            // authProviders.Email,
             authProviders.Google,
-            authProviders.Facebook,
+            // authProviders.Facebook,
           ],
           callbacks: {
             // Nuxtのローカルサーバーで起こるCORSエラーのためこのように設定。本番環境では不要

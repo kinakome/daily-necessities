@@ -13,12 +13,12 @@ export const getters = {
 
 export const actions = {
   gotUser({ commit }, user) {
-      commit("setUser", user)
+    commit("setUser", user)
   },
   logout({ commit }) {
-      auth.signOut().then(() => {
-        commit("logout")
-      })
+    auth.signOut().then(() => {
+      commit("logout")
+    })
   },
   nuxtClientInit ( commit, state, dispatch ){
     if (localStorage.accessToken && token == "") {

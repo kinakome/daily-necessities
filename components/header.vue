@@ -8,8 +8,8 @@
         <span>Daily necessities !</span>
       </div>
       <div class="header-right">
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click="updatePath" v-if="getLoginStatus"></nuxt-link>
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click="updatePath" v-else></nuxt-link>
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-if="getLoginStatus"></nuxt-link>
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-else></nuxt-link>
       </div>
     </div>
     <HeaderNav />
@@ -18,6 +18,8 @@
 
 <script>
 import HeaderNav from "@/components/headerNav.vue";
+import { auth, authProviders } from '~/plugins/firebase'
+
 export default {
   components: {
     HeaderNav
@@ -35,6 +37,17 @@ export default {
         top: 0,
         behavior: "smooth"
       });
+
+      this.$store.commit('updatePath', this.loginUrl)
+    },
+    async signOut() {
+      await this.$store.dispatch('authenticated/logout')
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
       this.$store.commit('updatePath', this.loginUrl)
     }
   },
