@@ -3,7 +3,6 @@ import { auth } from '~/plugins/firebase'
 export const state = () => ({
   status: "",
   token: "",
-  // localStorage.getItem('token') || ''
   username: ""
 })
 
@@ -37,6 +36,7 @@ export const mutations = {
     state.username = ""
   },
   setToken(state, token) {
+    state.status = "loggedIn"
     state.token = token
   }
 }

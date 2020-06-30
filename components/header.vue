@@ -8,8 +8,8 @@
         <span>Daily necessities !</span>
       </div>
       <div class="header-right">
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-if="getLoginStatus"></nuxt-link>
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-else></nuxt-link>
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-if="isLoggedIn"></nuxt-link>
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-else></nuxt-link>
       </div>
     </div>
     <HeaderNav />
@@ -21,6 +21,15 @@ import HeaderNav from "@/components/headerNav.vue";
 import { auth, authProviders } from '~/plugins/firebase'
 
 export default {
+  mounted() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch("authenticated/gotUser", user)
+      } else {
+        // if(route.name !== "login") redirect("/login")
+      }
+    })
+  },
   components: {
     HeaderNav
   },
@@ -28,7 +37,7 @@ export default {
     return {
       loginUrl: '/signIn',
     }
-  },    //クリック時storeのパスを上書き
+  },
   methods: {
     //クリック時storeのパスを上書き
     updatePath() {
@@ -52,8 +61,8 @@ export default {
     }
   },
   computed: {
-    getLoginStatus() {
-      return this.$store.getters['authenticated/isLoggedIn'] == ""
+    isLoggedIn() {
+      return this.$store.getters['authenticated/isLoggedIn']
     }
   }
 };
