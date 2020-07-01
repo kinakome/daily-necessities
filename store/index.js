@@ -5,7 +5,7 @@ export const state = () => ({
 		latitude: 35.681236,
 		longitude: 139.767125
 	},
-	widgetList: ["TrainInfo", "LunchLibrary"]
+	widgetList: ["TrainInfo", "LunchLibrary", "Calendar"]
 })
 
 export const getters = {

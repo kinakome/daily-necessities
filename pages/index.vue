@@ -15,11 +15,14 @@
 <script>
 import TrainInfo from '~/components/widgets/trainInfo.vue'
 import LunchLibrary from '~/components/widgets/lunchLibrary.vue'
+import Calendar from '~/components/widgets/calendar.vue'
+
 
 export default {
   components: {
     TrainInfo,
-    LunchLibrary
+    LunchLibrary,
+    Calendar
   }
 }
 </script>
