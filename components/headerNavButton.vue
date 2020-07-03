@@ -60,11 +60,21 @@ export default {
   position: relative;
   z-index: 2;
       box-shadow: 0 0 5px rgb(151, 151, 151);
+  @include mobile {
+    height: 45px;
+    width: 100%;
+    display: none;
+    border-radius: 5px;
+    font-size: 25px;
+  }
 
   a {
     padding-top: 15px;
     display: block;
     height: 100%;
+    @include mobile {
+      padding-top: 8px;
+    }
   }
   a:link, a:visited, a:hover, a:active {
     color: $white;

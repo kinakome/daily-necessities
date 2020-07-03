@@ -85,9 +85,13 @@ main {
   min-height: 600px;
   background-color: $white;
   text-align: center;
-  padding: 180px 46px 30px 46px;
+	padding: 180px 46px 30px 46px;
   z-index: 10;
-  position: relative;
+	position: relative;
+	@include mobile {
+		width: calc(100% - 40px);
+		padding: 140px 20px 30px 20px;
+	}
 }
 
 .page-transition-enter {

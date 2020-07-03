@@ -25,17 +25,24 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
+	@include mobile {
+		padding: 10px 20px;
+		height: 60px;
+		flex-direction: column;
+	}
  	>:first-child {
-  border-radius: 5px 0px 0px 5px;
+  // border-radius: 5px 0px 0px 5px;
 	}
 
 	>:last-child {
-  border-radius: 0px 5px 5px 0px;
+  // border-radius: 0px 5px 5px 0px;
 	}
 
 	.selected{
 		background-color: $gray;
+		@include mobile {
+			display: block;
+		}
 	}
 
 }

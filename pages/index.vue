@@ -45,6 +45,9 @@ export default {
     height: 280px;
     margin-bottom: 30px;
     box-shadow: 0 0 5px #D2D2D2;
+    @include mobile {
+      width: 100%;
+    }
   }
 }
 

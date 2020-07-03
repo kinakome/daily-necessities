@@ -82,12 +82,18 @@ header{
     color: $white;
     height: 80px;
     background-color: $baseBlack;
+    @include mobile {
+      height: 60px;
+    }
     &-left{
       float: left;
       padding: 13px 0px 0px 46px ;
       img{
         width: 45.17px;
         height: 49.09px;
+      }
+      @include mobile {
+        display: none;
       }
     }
     &-center{
@@ -97,14 +103,25 @@ header{
       text-align: center;
       font-size: 40px ;
       font-weight: 700;
+      @include mobile {
+        width: calc(100% - 47px);
+        font-size: 30px ;
+      }
     }
     &-right{
       float: right;
       padding: 13px 46px 0px 0px;
+      @include mobile {
+      padding: 15px 16px 0px 0px;
+      }
       img{
         width: 45.17px;
         height: 49px;
         transition: .3s;
+        @include mobile {
+          width: 30px;
+          height: 30px;
+        }
         &:hover{
           opacity: 0.7;
         }
