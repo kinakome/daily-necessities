@@ -99,7 +99,7 @@ header{
     &-center{
       float: left;
       width: calc(100% - 190px);
-      padding-top: 18px;
+      padding-top: 15px;
       text-align: center;
       font-size: 40px ;
       font-weight: 700;

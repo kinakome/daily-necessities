@@ -26,28 +26,42 @@ export default {
   data(){
     return {
       show: true,
+      open: false
     }
   },
   methods: {
     mouseOverAction() {
-      console.log(window.innerWidth)
-      if(window.innerWidth >= 720){
+      if(window.innerWidth > 720){
         this.show = false
       }
     },
     mouseLemoveAction() {
-      if(window.innerWidth >= 720){
+      if(window.innerWidth > 720){
         this.show = true
       }
     },
     //クリック時storeのパスを上書き
     updatePath() {
-      //クリック時にスクロールを元に戻す
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-      this.$store.commit('updatePath', this.url)
+      if(window.innerWidth <= 720){
+        if(this.$el.classList.value.indexOf('selected') == 0 && this.open == false){
+          this.open = true
+        }else if(this.$el.classList.value.indexOf('selected') == -1 && this.open == true){
+          this.open = false
+        }else{
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          this.$store.commit('updatePath', this.url)
+          this.open = false
+        }
+      }else{
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        this.$store.commit('updatePath', this.url)
+      }
     }
   }
 };
@@ -81,9 +95,11 @@ export default {
       padding-top: 8px;
     }
   }
+  
   a:link, a:visited, a:hover, a:active {
     color: $white;
   }
+
   .explanation{
     padding-top: 17px;
     font-size: 23px;
@@ -91,9 +107,11 @@ export default {
     font-weight: 700;
   }
 }
+
 .selected{
   background-color: $gray;
 }
+
 //transition
 .toggle-enter-active, .toggle-leave-active {
   transition: opacity 0.2s;
