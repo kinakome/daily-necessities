@@ -30,10 +30,15 @@ export default {
   },
   methods: {
     mouseOverAction() {
-      this.show = false
+      console.log(window.innerWidth)
+      if(window.innerWidth >= 720){
+        this.show = false
+      }
     },
     mouseLemoveAction() {
-      this.show = true
+      if(window.innerWidth >= 720){
+        this.show = true
+      }
     },
     //クリック時storeのパスを上書き
     updatePath() {
@@ -111,6 +116,9 @@ export default {
   background-color: $black;
   transition: .3s;
   z-index: -1;
+  @include mobile {
+    display: none;
+  }
 }
 
 .header-nav-button:hover:before {
