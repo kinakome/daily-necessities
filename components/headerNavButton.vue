@@ -26,7 +26,7 @@ export default {
   data(){
     return {
       show: true,
-      open: false
+      open: false,
     }
   },
   methods: {
@@ -44,8 +44,12 @@ export default {
     updatePath() {
       if(window.innerWidth <= 720){
         if(this.$el.classList.value.indexOf('selected') == 0 && this.open == false){
+          this.$parent.$data.pStyle.height = '150px'
+          console.log(this.$parent.$data.pStyle.height)
           this.open = true
-        }else if(this.$el.classList.value.indexOf('selected') == -1 && this.open == true){
+        }else if(this.$el.classList.value.indexOf('selected') == 0 && this.open == true){
+          console.log("aaaa")
+          this.$parent.$data.pStyle.height = '60px'
           this.open = false
         }else{
           window.scrollTo({
@@ -80,7 +84,7 @@ export default {
   z-index: 2;
       box-shadow: 0 0 5px rgb(151, 151, 151);
   @include mobile {
-    height: 45px;
+    height: 40px;
     width: 100%;
     display: none;
     border-radius: 5px;
@@ -95,7 +99,7 @@ export default {
       padding-top: 8px;
     }
   }
-  
+
   a:link, a:visited, a:hover, a:active {
     color: $white;
   }

@@ -1,7 +1,8 @@
 require('dotenv').config()
 
 module.exports = {
-  mode: 'universal',
+  // mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
