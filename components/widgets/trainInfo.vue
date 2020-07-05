@@ -14,14 +14,19 @@
 						<div class="station-box-item selected-box"></div>
 						<div class="station-box-item"></div>
 					</div>
-					<transition-group name="station-list" tag="ul">
-						<li v-for="(station, index) in updateStaions" :key=station :class="{'selected-station': index==1}">{{station}}</li>
-					</transition-group>
+					<v-touch v-on:swipeup="selectUp" v-on:swipedown="selectDown">
+						<transition-group name="station-list" tag="ul">
+							<li v-for="(station, index) in updateStaions" :key=station :class="{'selected-station': index==1}">{{station}}</li>
+						</transition-group>
+					</v-touch>
 				</div>
 			</div>
 			<div class="train-info-contents-right">
 				<ul v-if="!load">
-					<li v-for="(train, index) in selectedStation.train" :key=train.line :class="{'selected-station': index==1}">{{train.line}} {{train.distance}} </li>
+					<li v-for="(train, index) in selectedStation.train" :key=train.line :class="{'selected-station': index==1}">
+						<div class="line-name">{{train.line}}</div> 
+						<div class="line-distance">{{train.distance}} </div>
+					</li>
 				</ul>
 				<no-ssr>
 						<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
@@ -151,6 +156,11 @@
 					left: 90px;
 					z-index: 30;
 					height: calc(100% - 40px );
+					font-size: 20px;
+					@include mobile{
+						left: 40px;
+						font-size: 16px;
+					}
 					li{
 						display: block;
 						color: $lightGray;
@@ -160,7 +170,6 @@
 					.selected-station{
 						font-weight: 700;
 						color: $white;
-						font-size: 20px;
 						height: 40%;
 						padding-top: 20px;
 					}
@@ -176,10 +185,14 @@
 					border-width: 0 10px 12px 10px;
 					border-color: transparent transparent $white transparent;
 					transition: .3s;
-					&:hover{
-					border-color: transparent transparent $lightGray transparent;
+					@include mobile{
+						left: 10px;
 					}
-
+					@include pc{
+						&:hover{
+							border-color: transparent transparent $lightGray transparent;
+						}
+					}
 				}
 				.arrow-down{
 					position: absolute;
@@ -190,8 +203,13 @@
 					border-style: solid;
 					border-width: 12px 10px 0 10px;
 					border-color: $white transparent transparent transparent;
-					&:hover{
-						border-color: $lightGray transparent transparent transparent;
+					@include mobile{
+						left: 10px;
+					}
+					@include pc{
+						&:hover{
+							border-color: $lightGray transparent transparent transparent;
+						}
 					}
 				}
 				.station-list-move {
@@ -218,6 +236,20 @@
 					margin: 0 auto;
 					margin-bottom: 10px;
 					color: $baseBlack;
+					.line{
+						&-name{
+							display: inline;
+							@include mobile {
+								display: block;
+							}
+						}
+						&-distance{
+							display: inline;
+							@include mobile {
+								display: block;
+							}
+						}
+					}
 				}
 			}
 		}

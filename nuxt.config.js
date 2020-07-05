@@ -36,7 +36,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/vue-loading-template.js', ssr: false }
+    { src: '~/plugins/vue-loading-template.js', ssr: false },
+    { src: '~/plugins/vue-touch.js'},
   ],
   /*
   ** Nuxt.js dev-modules

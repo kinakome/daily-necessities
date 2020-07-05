@@ -12,3 +12,8 @@ $mobileMax: 720px;
     @content;
   }
 }
+@mixin pc {
+  @media (min-width: ($mobileMax)) {
+    @content;
+  }
+}
