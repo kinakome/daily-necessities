@@ -14,10 +14,12 @@ import { mapGetters } from 'vuex'
 export default {
   mounted() {
     window.addEventListener('resize', this.handleResize)
-    if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+    if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
       this.showButton = false
+      this.$store.commit('updateButtonStatus', false)
+    }else{
+      this.showButton = true
     }
-    console.log(this.$store.state.buttonStatus)
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize)
@@ -58,15 +60,14 @@ export default {
     //クリック時storeのパスを上書き
     clickAction() {
       if(window.innerWidth <= 720){
-        if(this.$el.classList.value.indexOf('selected') == 0 && this.open == false){
+        if(this.url == this.$store.state.currentPath && this.open == false){
           this.$parent.$data.pStyle.height = '160px'
           this.open = true
           this.$store.commit('updateButtonStatus', true)
-        }else if(this.$el.classList.value.indexOf('selected') == 0 && this.open == true){
+        }else if(this.url == this.$store.state.currentPath && this.open == true){
           this.$parent.$data.pStyle.height = '60px'
           this.open = false
           this.$store.commit('updateButtonStatus', false)
-          
         }else{
           window.scrollTo({
             top: 0,
@@ -88,7 +89,7 @@ export default {
     handleResize() {
       // windowsサイズ変更を検知
       this.window = window.innerWidth;
-      if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+      if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
         this.showButton = false
       }else{
         this.showButton = true
@@ -100,8 +101,7 @@ export default {
   },
   watch: {
     buttonStatus: function (newStatus, oldStatus) {
-      console.log(newStatus)
-      if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+      if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
         this.showButton = newStatus
       }
     }

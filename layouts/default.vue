@@ -12,9 +12,11 @@
 <script>
 	import Header from "@/components/header.vue"; // headerをインポート
 	export default {
-    //初回ロード時storeのパスを更新
-    mounted(){
+		//初回ロード時storeのパスを更新
+		created(){
       this.$store.commit('updatePath', this.$route.path)
+		},
+    mounted(){
 			this.getStation()
 			this.$store.dispatch('authenticated/nuxtClientInit')
     },
