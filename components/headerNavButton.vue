@@ -1,20 +1,23 @@
 <template>
-  <div @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction" @click="updatePath" 
-  :class="{selected: url==$store.state.currentPath, 'header-nav-button': true}" v-show='selected'>
+  <div @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction" @click="clickAction" 
+  :class="{selected: url==$store.state.currentPath, 'header-nav-button': true}" v-show='showButton'>
     <transition name="toggle" mode="out-in">
-      <nuxt-link :to="url" v-if="show" key="title">{{ title }}</nuxt-link>
+      <nuxt-link :to="url" v-if="showTitle" key="title">{{ title }}</nuxt-link>
       <nuxt-link :to="url" v-else key="explanation" class="explanation">{{ explanation }}</nuxt-link>
     </transition>	
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   mounted() {
     window.addEventListener('resize', this.handleResize)
     if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
-      this.selected = false
+      this.showButton = false
     }
+    console.log(this.$store.state.buttonStatus)
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize)
@@ -35,39 +38,43 @@ export default {
   },
   data(){
     return {
-      show: true,
+      showTitle: true,
       open: false,
-      selected: true,
+      showButton: true,
       whindow: window.innerWidth
     }
   },
   methods: {
     mouseOverAction() {
       if(window.innerWidth > 720){
-        this.show = false
+        this.showTitle = false
       }
     },
     mouseLemoveAction() {
       if(window.innerWidth > 720){
-        this.show = true
+        this.showTitle = true
       }
     },
     //クリック時storeのパスを上書き
-    updatePath() {
+    clickAction() {
       if(window.innerWidth <= 720){
-        console.log(this.$parent)
         if(this.$el.classList.value.indexOf('selected') == 0 && this.open == false){
-          this.$parent.$data.pStyle.height = '150px'
+          this.$parent.$data.pStyle.height = '160px'
           this.open = true
+          this.$store.commit('updateButtonStatus', true)
         }else if(this.$el.classList.value.indexOf('selected') == 0 && this.open == true){
           this.$parent.$data.pStyle.height = '60px'
           this.open = false
+          this.$store.commit('updateButtonStatus', false)
+          
         }else{
           window.scrollTo({
             top: 0,
             behavior: 'smooth'
           });
           this.$store.commit('updatePath', this.url)
+          this.$store.commit('updateButtonStatus', false)
+          this.$parent.$data.pStyle.height = '60px'
           this.open = false
         }
       }else{
@@ -78,15 +85,26 @@ export default {
         this.$store.commit('updatePath', this.url)
       }
     },
-      handleResize() {
-				// windowsサイズ変更を検知
-				this.window = window.innerWidth;
-        if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
-          this.selected = false
-        }else{
-          this.selected = true
-        }
-			}
+    handleResize() {
+      // windowsサイズ変更を検知
+      this.window = window.innerWidth;
+      if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+        this.showButton = false
+      }else{
+        this.showButton = true
+      }
+    },
+  },
+  computed: {
+    ...mapGetters(['buttonStatus'])
+  },
+  watch: {
+    buttonStatus: function (newStatus, oldStatus) {
+      console.log(newStatus)
+      if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+        this.showButton = newStatus
+      }
+    }
   }
 };
 </script>

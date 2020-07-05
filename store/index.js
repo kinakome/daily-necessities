@@ -5,11 +5,13 @@ export const state = () => ({
 		latitude: 35.681236,
 		longitude: 139.767125
 	},
-	widgetList: ["TrainInfo", "LunchLibrary"]
+	widgetList: ["TrainInfo", "LunchLibrary"],
+	buttonStatus: true
 })
 
 export const getters = {
-	location: state => state.location
+	location: state => state.location,
+	buttonStatus: state => state.buttonStatus
 }
 
 //現在地書き換え
@@ -21,6 +23,9 @@ export const mutations = {
 	},
 	updatePath (state, path) {
 		state.currentPath = path
+	},
+	updateButtonStatus (state, status) {
+		state.buttonStatus = status
 	}
 }
 
