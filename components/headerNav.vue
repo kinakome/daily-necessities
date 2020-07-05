@@ -28,14 +28,13 @@
 					'height': '80px'
 				},
 				whindow: window.innerWidth,
-
 			}
 		},
 		components: {
 			HeaderNavButton
 		},
 		methods: {
-			handleResize: function() {
+			handleResize() {
 				// windowsサイズ変更を検知
 				this.window = window.innerWidth;
 				if(this.window <= 720){
@@ -83,9 +82,6 @@
 	}
 	.selected{
 		background-color: $gray;
-		@include mobile {
-			display: block;
-		}
 	}
 
 }

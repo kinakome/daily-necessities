@@ -1,5 +1,6 @@
 <template>
-  <div @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction" @click="updatePath" :class="{selected: url==$store.state.currentPath, 'header-nav-button': true}">
+  <div @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction" @click="updatePath" 
+  :class="{selected: url==$store.state.currentPath, 'header-nav-button': true}" v-show='selected'>
     <transition name="toggle" mode="out-in">
       <nuxt-link :to="url" v-if="show" key="title">{{ title }}</nuxt-link>
       <nuxt-link :to="url" v-else key="explanation" class="explanation">{{ explanation }}</nuxt-link>
@@ -9,6 +10,15 @@
 
 <script>
 export default {
+  mounted() {
+    window.addEventListener('resize', this.handleResize)
+    if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+      this.selected = false
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize)
+  },
   props: {
     title: {
       type: String,
@@ -27,6 +37,8 @@ export default {
     return {
       show: true,
       open: false,
+      selected: true,
+      whindow: window.innerWidth
     }
   },
   methods: {
@@ -43,12 +55,11 @@ export default {
     //クリック時storeのパスを上書き
     updatePath() {
       if(window.innerWidth <= 720){
+        console.log(this.$parent)
         if(this.$el.classList.value.indexOf('selected') == 0 && this.open == false){
           this.$parent.$data.pStyle.height = '150px'
-          console.log(this.$parent.$data.pStyle.height)
           this.open = true
         }else if(this.$el.classList.value.indexOf('selected') == 0 && this.open == true){
-          console.log("aaaa")
           this.$parent.$data.pStyle.height = '60px'
           this.open = false
         }else{
@@ -66,7 +77,16 @@ export default {
         });
         this.$store.commit('updatePath', this.url)
       }
-    }
+    },
+      handleResize() {
+				// windowsサイズ変更を検知
+				this.window = window.innerWidth;
+        if(window.innerWidth <= 720 && this.$el.classList.value.indexOf('selected') == -1){
+          this.selected = false
+        }else{
+          this.selected = true
+        }
+			}
   }
 };
 </script>
@@ -82,11 +102,10 @@ export default {
   overflow: hidden;
   position: relative;
   z-index: 2;
-      box-shadow: 0 0 5px rgb(151, 151, 151);
+  box-shadow: 0 0 5px rgb(151, 151, 151);
   @include mobile {
     height: 40px;
     width: 100%;
-    display: none;
     border-radius: 5px;
     font-size: 25px;
   }
