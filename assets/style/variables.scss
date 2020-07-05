@@ -3,3 +3,12 @@ $baseBlack: #171717;
 $black: #333;
 $gray: #707070;
 $lightGray: #D2D2D2;
+
+
+//レスポンシブ設定
+$mobileMax: 720px;
+@mixin mobile {
+  @media (max-width: ($mobileMax)) {
+    @content;
+  }
+}

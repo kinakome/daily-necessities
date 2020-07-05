@@ -12,9 +12,11 @@
 <script>
 	import Header from "@/components/header.vue"; // headerをインポート
 	export default {
-    //初回ロード時storeのパスを更新
-    mounted(){
+		//初回ロード時storeのパスを更新
+		created(){
       this.$store.commit('updatePath', this.$route.path)
+		},
+    mounted(){
 			this.getStation()
 			this.$store.dispatch('authenticated/nuxtClientInit')
     },
@@ -85,9 +87,13 @@ main {
   min-height: 600px;
   background-color: $white;
   text-align: center;
-  padding: 180px 46px 30px 46px;
+	padding: 180px 46px 30px 46px;
   z-index: 10;
-  position: relative;
+	position: relative;
+	@include mobile {
+		width: calc(100% - 40px);
+		padding: 140px 20px 30px 20px;
+	}
 }
 
 .page-transition-enter {
