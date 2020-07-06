@@ -81,17 +81,17 @@ module.exports = {
     ** You can extend webpack config here
     */
     
-    // babel: {
-    //   presets({ isServer }) {
-    //     const targets = isServer ? { node: 'current' } : { ie: 11 }
-    //     return [
-    //       [
-    //         require.resolve('@nuxt/babel-preset-app'), { targets },
-    //       ]
-    //     ]
-    //   }
-    // },
-    // extend (config, ctx) {
-    // }
+    babel: {
+      presets({ isServer }) {
+        const targets = isServer ? { node: 'current' } : { ie: 11 }
+        return [
+          [
+            require.resolve('@nuxt/babel-preset-app'), { targets },
+          ]
+        ]
+      }
+    },
+    extend (config, ctx) {
+    }
   }
 }

@@ -26,7 +26,9 @@ export const actions = {
     const setLunch = `&lunch=1`
     const setHit = `&hit_per_page=100`
     const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setLunch + setHit) 
-    const res = await this.$axios.$get(getUrl)
+    const res = await this.$axios.$get(getUrl, { 
+      withCredentials: true
+    })
     context.commit("updateRestaurant", res)
   }
 }
