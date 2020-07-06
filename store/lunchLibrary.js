@@ -17,8 +17,8 @@ export const mutations = {
 export const actions = {
 	//最寄ランチ取得
   async updateRestaurantAction (context, storeOption) {
-    const baseUrl = "http://api.gnavi.co.jp/RestSearchAPI/v3/"
-    // const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
+    // const baseUrl = "http://api.gnavi.co.jp/RestSearchAPI/v3/"
+    const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     const setKey = `?keyid=${ process.env.GURUNAVI_API_KEY }`
 		const setLongitude = `&longitude=${ storeOption.location.longitude }`
     const setLatitude = `&latitude=${ storeOption.location.latitude }`
@@ -26,9 +26,7 @@ export const actions = {
     const setLunch = `&lunch=1`
     const setHit = `&hit_per_page=100`
     const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setLunch + setHit) 
-    const res = await this.$axios.$get(getUrl, { 
-      withCredentials: true
-    })
+    const res = await this.$axios.$get(getUrl)
     context.commit("updateRestaurant", res)
   }
 }
