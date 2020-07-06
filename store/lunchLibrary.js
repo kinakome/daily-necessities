@@ -17,7 +17,8 @@ export const mutations = {
 export const actions = {
 	//最寄ランチ取得
   async updateRestaurantAction (context, storeOption) {
-    const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
+    const baseUrl = "http://api.gnavi.co.jp/RestSearchAPI/v3/"
+    // const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     const setKey = `?keyid=${ process.env.GURUNAVI_API_KEY }`
 		const setLongitude = `&longitude=${ storeOption.location.longitude }`
     const setLatitude = `&latitude=${ storeOption.location.latitude }`
