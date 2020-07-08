@@ -6,6 +6,7 @@
 		<div class="train-info-contents">
 			<div class="train-info-contents-left">
 				<div class="train-info-contents-left-title">現在地から近い駅</div>
+				<!-- <div class="train-info-contents-left-title">駅名をスワイプして切替</div> -->
 				<div class="train-info-contents-left-stations">
 					<div class="arrow-up" @click="selectUp"></div>
 					<div class="arrow-down" @click="selectDown"></div>
@@ -155,17 +156,23 @@
 					top: 30px;
 					left: 90px;
 					z-index: 30;
-					height: calc(100% - 40px );
+					height: calc(100% - 40px);
 					font-size: 20px;
 					@include mobile{
-						left: 40px;
+						width: 100%;
+						left: 0px;
 						font-size: 16px;
 					}
 					li{
+						text-align: center;
 						display: block;
 						color: $lightGray;
+						width: 100%;
 						height: 30%;
 						padding-top: 13px;
+						@include mobile {
+							padding-left: 30px;
+						}
 					}
 					.selected-station{
 						font-weight: 700;
