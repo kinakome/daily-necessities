@@ -187,6 +187,9 @@
 					transition: .3s;
 					@include mobile{
 						left: 10px;
+						&:active{
+							border-color: transparent transparent $lightGray transparent;
+						}
 					}
 					@include pc{
 						&:hover{
@@ -205,6 +208,9 @@
 					border-color: $white transparent transparent transparent;
 					@include mobile{
 						left: 10px;
+						&:active{
+							border-color: $lightGray transparent transparent transparent;
+						}
 					}
 					@include pc{
 						&:hover{

@@ -5,7 +5,7 @@
 		</div>
 		<div class="lunch-library-contents">
 			<div class="lunch-library-contents-top">
-				<div class="lunch-library-contents-top-title">現在地から近いランチ営業店</div>
+				<div class="lunch-library-contents-top-title">近くのランチ営業店</div>
         <div class="arrow-left" @click="selectLeft"></div>
         <div class="arrow-right" @click="selectRight"></div>
         <div class="lunch-library-contents-top-distance">        
@@ -18,21 +18,23 @@
         <no-ssr>
           <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 				</no-ssr>
-        <transition-group name="restaurant-list" tag="ul">
-          <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">
-            <div class="restaurant-box">
-              <img src="@/assets/img/no-image.svg" :class="{'selected-image': index==1}" v-if='restaurant.image_url.shop_image1 == ""'>
-              <img :src=restaurant.image_url.shop_image1 :class="{'selected-image': index==1}" v-else>
-              <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>
-                <span id="restaurant-name">{{restaurant.name}}</span>
-                <span id="opentime">営業時間：{{restaurant.opentime}}</span>
-                <span id="lunch-price" v-if='restaurant.lunch!=""'>ランチ価格：{{restaurant.lunch}}円程度</span>
-                <a :href=restaurant.url target="_blank">ぐるなびで開く</a>
+        <v-touch v-on:swipeleft="selectLeft" v-on:swiperight="selectRight">
+          <transition-group name="restaurant-list" tag="ul">
+            <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">
+              <div class="restaurant-box">
+                <img src="@/assets/img/no-image.svg" :class="{'selected-image': index==1}" v-if='restaurant.image_url.shop_image1 == ""'>
+                <img :src=restaurant.image_url.shop_image1 :class="{'selected-image': index==1}" v-else>
+                <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>
+                  <span id="restaurant-name">{{restaurant.name}}</span>
+                  <span id="opentime">営業時間：{{restaurant.opentime}}</span>
+                  <span id="lunch-price" v-if='restaurant.lunch!=""'>ランチ価格：{{restaurant.lunch}}円程度</span>
+                  <a :href=restaurant.url target="_blank">ぐるなびで開く</a>
+                </div>
+                <div class="restaurant-box-info" v-else>{{restaurant.name}}</div>
               </div>
-              <div class="restaurant-box-info" v-else>{{restaurant.name}}</div>
-            </div>
-          </li>
-        </transition-group>
+            </li>
+          </transition-group>
+        </v-touch>
       </div>
       <div class="lunch-library-contents-footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
@@ -127,11 +129,14 @@
 			position: relative;
       @include clearfix;
 			&-title{
-				width: calc(30%);
+				width: 30%;
 				text-align: left;
 				font-size: 12px;
         color: $gray;
         float: left;
+        @include mobile {
+          display: none;
+        }
       }
       .arrow{
         &-left{
@@ -144,8 +149,16 @@
           border-width: 7px 20px 7px 0;
           border-color: transparent $gray transparent transparent;
           transition: .3s;
-          &:hover{
+          @include pc {
+            &:hover{
             border-color: transparent $lightGray transparent transparent;
+            }
+          }
+          @include mobile {
+            &:active{
+              border-color: transparent $lightGray transparent transparent;
+            }
+            left: 10%;
           }
         }
         &-right{
@@ -158,14 +171,26 @@
           border-width: 7px 0 7px 20px;
           border-color: transparent transparent transparent $gray;
           transition: .3s;
-          &:hover{
-            border-color: transparent transparent transparent $lightGray;
+          @include pc {
+            &:hover{
+              border-color: transparent transparent transparent $lightGray;
+            }
           }
+          @include mobile {
+            &:active{
+              border-color: transparent transparent transparent $lightGray;
+            }
+            left: calc(10% + 30px);
+          }
+
         }
       }
       &-distance{
         width: 50%;
         float: right;
+        @include mobile {
+          width: 70%;
+        }
         ul{
           list-style: none;
           float: right;
@@ -181,6 +206,10 @@
             transition: .3s;
             &:hover{
               background-color: $lightGray;
+            }
+            @include mobile {
+              font-size: 12px;
+              width: 50px;
             }
           }
           .selected{
@@ -215,6 +244,10 @@
           position: absolute;
           color: $baseBlack;
           padding-top: 5px;
+          background-color: $white;
+          @include mobile {
+            height: 130px;
+          }
           &:first-child{
             top: 0px;
             left: 0px;
@@ -240,6 +273,9 @@
             height: 120px;
             width: 120px;
             margin-left: 46px;
+            @include mobile {
+              margin-left: calc(50% - 60px);
+            }
           }
           &-info{
             padding: 3px;
@@ -250,6 +286,9 @@
             bottom: 0;
             width: 100%;
             font-size: 12px;
+            @include mobile {
+              height: 70px;
+            }
             &__selected{
               height: 100px;
               #restaurant-name{
@@ -282,8 +321,16 @@
                 bottom: 5px;
                 left: 63px;
                 transition: .2s;
-                &:hover{
-                  background-color: $gray;
+                @include pc {
+                  &:hover{
+                    background-color: $gray;
+                  }
+                }
+                @include mobile {
+                  left: calc(50% - 40px);
+                  &:active{
+                    background-color: $gray;
+                  }
                 }
               }
               #lunch-price{
@@ -304,6 +351,11 @@
           box-shadow: 0 0 5px $lightGray;
           top: 0px;
           right: 174px; 
+          @include mobile {
+            width: calc(70% - 20px);
+            right: 15%; 
+            z-index: 20;
+          }
         }
         .restaurant-list{
           &-enter{
