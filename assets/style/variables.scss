@@ -7,13 +7,22 @@ $lightGray: #D2D2D2;
 
 //レスポンシブ設定
 $mobileMax: 720px;
+$iphoneSeMax: 330px;
+
 @mixin mobile {
   @media (max-width: ($mobileMax)) {
     @content;
   }
 }
+
 @mixin pc {
   @media (min-width: ($mobileMax)) {
+    @content;
+  }
+}
+
+@mixin iphoneSE {
+  @media (max-width: ($iphoneSeMax)) {
     @content;
   }
 }

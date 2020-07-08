@@ -106,6 +106,10 @@ header{
       @include mobile {
         width: calc(100% - 47px);
         font-size: 30px ;
+        padding-left: 30px;
+      }
+      @include iphoneSE {
+        font-size: 28px ;
       }
     }
     &-right{
