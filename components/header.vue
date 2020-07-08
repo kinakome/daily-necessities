@@ -122,12 +122,12 @@ header{
         width: 45.17px;
         height: 49px;
         transition: .3s;
+        &:hover{
+          opacity: 0.7;
+        }
         @include mobile {
           width: 30px;
           height: 30px;
-        }
-        &:hover{
-          opacity: 0.7;
         }
       }
     }

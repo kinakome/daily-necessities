@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div  ontouchstart="">
 		<Header />
 		<main>
       <transition mode="out-in" name="page-transition">
