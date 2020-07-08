@@ -5,7 +5,7 @@
         <img src="@/assets/img/site-icon.png">
       </div>
       <div class="header-center">
-        <span>Daily necessities !</span>
+        <span>Daily Necessities !</span>
       </div>
       <div class="header-right">
         <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-if="isLoggedIn"></nuxt-link>

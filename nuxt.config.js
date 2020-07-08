@@ -49,7 +49,8 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/proxy',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/pwa'
   ],
   env: {
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
@@ -58,6 +59,10 @@ module.exports = {
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
     GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY
+  },
+  manifest: {
+    name: "Daily Necessities",
+    lang: 'en'
   },
   // fontのimport
   modules: [['nuxt-webfontloader']],
