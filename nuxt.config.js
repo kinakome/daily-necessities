@@ -49,8 +49,10 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/proxy',
-    '@nuxtjs/dotenv',
-    '@nuxtjs/pwa'
+    '@nuxtjs/dotenv'
+  ],
+  buildModules: [
+    '@nuxtjs/pwa',
   ],
   env: {
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
