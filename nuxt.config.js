@@ -62,7 +62,7 @@ module.exports = {
   },
   manifest: {
     name: "Daily Necessities",
-    lang: 'en'
+    lang: 'ja'
   },
   // fontのimport
   modules: [['nuxt-webfontloader']],
