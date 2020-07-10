@@ -1,7 +1,7 @@
 <template>
 	<div class="header-nav" ref="headerButton" :style='pStyle' >
 		<HeaderNavButton title="Today's Info" explanation="今日の情報一覧" />
-		<HeaderNavButton title="Edit Widget" explanation="ウィジェット編集" url="/widgets/list"/>
+		<HeaderNavButton title="Edit Widget" explanation="ウィジェット編集" url="/map"/>
 		<HeaderNavButton title="My Page" explanation="マイページ" url="/signIn"/>
 	</div>
 </template>
