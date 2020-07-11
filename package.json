@@ -20,6 +20,7 @@
     "firebase": "^7.15.5",
     "firebaseui": "^4.5.1",
     "nuxt": "^2.0.0",
+    "nuxt-leaflet": "0.0.21",
     "nuxt-user-agent": "^1.2.2",
     "nuxt-webfontloader": "^1.1.0",
     "pug": "^3.0.0",
