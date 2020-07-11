@@ -11,6 +11,7 @@ export const state = () => ({
 })
 
 export const getters = {
+	currentPath: state => state.currentPath,
 	location: state => state.location,
 	buttonStatus: state => state.buttonStatus,
 	getLocation: state => state.getLocation
