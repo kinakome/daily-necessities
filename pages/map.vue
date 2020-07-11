@@ -1,7 +1,7 @@
 <template>
     <div id="map">
       <l-map
-        style="min-height: 75vh"
+        style="min-height: 78vh"
         :zoom="zoom"
         :center="center"
         :options="{zoomControl: true}"
