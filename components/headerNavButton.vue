@@ -97,12 +97,22 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['buttonStatus'])
+    ...mapGetters(['buttonStatus']),
+    ...mapGetters(['currentPath'])
   },
   watch: {
     buttonStatus: function (newStatus, oldStatus) {
       if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
         this.showButton = newStatus
+      }
+    },
+    currentPath: function(newStatus, oldStatus) {
+      console.log(this.url + ":::" + newStatus)
+      if(window.innerWidth <= 720 && this.url != newStatus && newStatus == "/signIn"){
+        console.log("aaaa")
+        this.showButton = false
+      }else if(window.innerWidth <= 720 && this.url == newStatus && newStatus == "/signIn"){
+        this.showButton = true
       }
     }
   }
