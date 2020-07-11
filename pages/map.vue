@@ -1,13 +1,15 @@
 <template>
     <div id="map">
       <l-map
-        style="min-height: 100vh"
+        style="min-height: 75vh"
         :zoom="zoom"
         :center="center"
-        :options="{zoomControl: false}"
+        :options="{zoomControl: true}"
+        v-if="getLocation"
       >
         <l-tile-layer :url="url"></l-tile-layer>
       </l-map>
+      <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-else></vue-loading>
     </div>
 </template>
 
@@ -22,8 +24,18 @@ export default {
   data() {
     return {
       url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      zoom: 20,
+      zoom: 17,
       center: [this.$store.state.location.latitude, this.$store.state.location.longitude]
+    }
+  },
+  computed: {
+    getLocation() {
+      return this.$store.getters['getLocation']
+    }
+  },
+  watch: {
+    getLocation(newStatus) {
+      this.center = [this.$store.state.location.latitude, this.$store.state.location.longitude]
     }
   }
 }
@@ -32,7 +44,8 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
 #map {
-  height: 50%;
+  // height: 50%;
   width: 100%;
+  overflow: hidden;
 }
 </style>

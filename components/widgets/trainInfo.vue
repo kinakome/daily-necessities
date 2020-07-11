@@ -29,9 +29,7 @@
 						<div class="line-distance">{{train.distance}} </div>
 					</li>
 				</ul>
-				<no-ssr>
-						<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
-				</no-ssr>
+				<vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
 				<div class="credit-area">©︎ HeartRails Express</div>	
 			</div>
 		</div>

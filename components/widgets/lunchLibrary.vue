@@ -15,9 +15,7 @@
         </div>
 			</div>
       <div class="lunch-library-contents-main">
-        <no-ssr>
-          <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
-				</no-ssr>
+        <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
         <v-touch v-on:swipeleft="selectLeft" v-on:swiperight="selectRight">
           <transition-group name="restaurant-list" tag="ul">
             <li v-for="(restaurant, index) in getRestaurant" :key=restaurant.id :class="{'selected-restaurant': index==1}">

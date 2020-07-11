@@ -51,7 +51,6 @@ module.exports = {
   modules: [
     '@nuxtjs/proxy',
     '@nuxtjs/dotenv',
-    // '@nuxtjs/nuxt-leaflet',
     'nuxt-leaflet'
   ],
   buildModules: [

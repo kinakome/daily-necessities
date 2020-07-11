@@ -1,8 +1,9 @@
 <template>
 	<div class="header-nav" ref="headerButton" :style='pStyle' >
-		<HeaderNavButton title="Today's Info" explanation="今日の情報一覧" />
-		<HeaderNavButton title="Edit Widget" explanation="ウィジェット編集" url="/map"/>
-		<HeaderNavButton title="My Page" explanation="マイページ" url="/signIn"/>
+		<HeaderNavButton title="Nearby Info" explanation="近隣情報" />
+		<HeaderNavButton title="Map" explanation="マップを表示" url="/map"/>
+		<HeaderNavButton title="My Page" explanation="マイページ" url="/signIn" v-if="isLoggedIn"/>
+		<HeaderNavButton title="Sign In" explanation="サインイン" url="/signIn" v-else/>
 	</div>
 </template>
 <script>
@@ -42,6 +43,11 @@
 				}else{
 					this.pStyle.height = '80px'
 				}
+			}
+		},
+		computed: {
+			isLoggedIn() {
+				return this.$store.getters['authenticated/isLoggedIn']
 			}
 		}
 	};
