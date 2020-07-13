@@ -39,6 +39,7 @@ module.exports = {
   plugins: [
     { src: '~/plugins/vue-loading-template.js', ssr: false },
     { src: '~/plugins/vue-touch.js'},
+    { src: '~/plugins/leaflet.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

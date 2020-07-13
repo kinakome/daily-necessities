@@ -8,24 +8,30 @@
         v-if="getLocation"
       >
         <l-tile-layer :url="url"></l-tile-layer>
+        <l-marker :lat-lng="[35.531424, 139.698249]"></l-marker>
+        <!-- <l-marker v-for="marker of marker" :lat-lng="marker"></l-marker> -->
       </l-map>
       <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-else></vue-loading>
     </div>
 </template>
 
 <script>
-import { LMap, LTileLayer } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 
 export default {
   components: {
     LMap,
-    LTileLayer
+    LTileLayer,
+    LMarker
   },
   data() {
     return {
       url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
       zoom: 17,
-      center: [this.$store.state.location.latitude, this.$store.state.location.longitude]
+      center: [this.$store.state.location.latitude, this.$store.state.location.longitude],
+      marker: {
+        center:  [this.$store.state.location.latitude, this.$store.state.location.longitude]
+      }
     }
   },
   computed: {
@@ -36,6 +42,7 @@ export default {
   watch: {
     getLocation(newStatus) {
       this.center = [this.$store.state.location.latitude, this.$store.state.location.longitude]
+      this.marker.center = [this.$store.state.location.latitude, this.$store.state.location.longitude]
     }
   }
 }
