@@ -73,15 +73,7 @@
 					const result = this.$store.state.trainInfo.stations
 					//駅名の重複排除
 					const names = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
-					//同じ駅名の路線を集約してハッシュを作成
-					// for (let i in names) {
-					// 	var stationInfo = {
-					// 		name: names[i],
-					// 		train: result.filter(({name}) => name === names[i])
-					// 	}
-					// 	stations.push(stationInfo)
-					// 	stationNames.push(names[i])
-					// }
+					
 					names.forEach(staName => {
 						let tmpStation = result.find(({name}) => name === staName)
 						var stationInfo = {

@@ -8,23 +8,29 @@
         v-if="getLocation && stations.length !=0"
       >
         <l-tile-layer :url="url"></l-tile-layer>
-        <l-marker :lat-lng="center"></l-marker>
+        <l-marker :lat-lng="center">
+          <l-popup :content="'現在地'"></l-popup>
+        </l-marker>
         <l-marker v-for="station of stations" :lat-lng="[station.location.latitude, station.location.longitude]" 
           :key="station.name" 
-        ></l-marker>
+        >
+          <!-- <l-popup :content="station.name + '駅'"></l-popup> -->
+          <l-popup :content="station.name + '駅'" ></l-popup>
+        </l-marker>
       </l-map>
       <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-else></vue-loading>
     </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 
 export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    LPopup
   },
   data() {
     return {
