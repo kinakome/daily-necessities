@@ -1,16 +1,22 @@
 //現在地
 export const state = () => ({
-	stations: []
+  stations: [],
+  stationInfo: []
 })
 
 export const getters = {
-	stations: state => state.stations
+  stations: state => state.stations,
+  stationInfo: state => state.stationInfo
 }
 
 export const mutations = {
 	updateStation (state, res) {
     //近隣の駅一覧の配列取得
     state.stations = res.response.station
+  },
+  updateStationInfo (state, stationInfo) {
+    //近隣の駅一覧の配列取得
+    state.stationInfo = stationInfo
 	}
 }
 
