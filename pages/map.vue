@@ -31,7 +31,7 @@ export default {
       url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
       zoom: 17,
       center: [this.$store.state.location.latitude, this.$store.state.location.longitude],
-      stations: {},
+      stations: this.$store.state.trainInfo.stationInfo,
       marker: {}
     }
   },
@@ -65,8 +65,8 @@ export default {
         }
         stations.push(stationInfo)
       })
-
       this.stations = stations
+      this.$store.commit('trainInfo/updateStationInfo', stations)
     }
   }
 }

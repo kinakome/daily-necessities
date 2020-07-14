@@ -74,20 +74,34 @@
 					//駅名の重複排除
 					const names = result.map(item => item.name).filter((value, index, self) => self.indexOf(value) == index)
 					//同じ駅名の路線を集約してハッシュを作成
-					for (let i in names) {
+					// for (let i in names) {
+					// 	var stationInfo = {
+					// 		name: names[i],
+					// 		train: result.filter(({name}) => name === names[i])
+					// 	}
+					// 	stations.push(stationInfo)
+					// 	stationNames.push(names[i])
+					// }
+					names.forEach(staName => {
+						let tmpStation = result.find(({name}) => name === staName)
 						var stationInfo = {
-							name: names[i],
-							train: result.filter(({name}) => name === names[i])
+							name: staName,
+							train: result.filter(({name}) => name === staName),
+							location: {
+								latitude: tmpStation.y,
+								longitude: tmpStation.x
+							}
 						}
+						stationNames.push(staName)
 						stations.push(stationInfo)
-						stationNames.push(names[i])
-					}
+					})
 					this.selectedStation = stations[1]
 					//駅名が3個ならロード完了
 					this.load = stationNames.length == 3 ? false : true 
 
 					this.stations = stations
 					this.stationNames = stationNames
+					this.$store.commit('trainInfo/updateStationInfo', stations)
 				}
 				return this.stationNames
 			}
