@@ -107,9 +107,7 @@ export default {
       }
     },
     currentPath: function(newStatus, oldStatus) {
-      console.log(this.url + ":::" + newStatus)
       if(window.innerWidth <= 720 && this.url != newStatus && newStatus == "/signIn"){
-        console.log("aaaa")
         this.showButton = false
       }else if(window.innerWidth <= 720 && this.url == newStatus && newStatus == "/signIn"){
         this.showButton = true
