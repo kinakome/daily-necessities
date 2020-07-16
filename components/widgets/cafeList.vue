@@ -1,17 +1,15 @@
 <template>
-	<div class="lunch-library">
-		<div class="lunch-library-header">
+	<div class="cafe-list">
+		<div class="cafe-list-header">
 			大手カフェチェーン
 		</div>
-		<div class="lunch-library-contents">
-			<div class="lunch-library-contents-top">
-				<div class="lunch-library-contents-top-title">近くのランチ営業店</div>
-        <div class="lunch-library-contents-top-distance">        
-        </div>
+		<div class="cafe-list-contents">
+			<div class="cafe-list-contents-top">
+				<div class="cafe-list-contents-top-title">近くのランチ営業店</div>
 			</div>
       <div class="lunch-library-contents-main">
       </div>
-      <div class="lunch-library-contents-footer">
+      <div class="cafe-list-contents-footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
       </div>
 		</div>
@@ -38,7 +36,7 @@
 
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
-.lunch-library{
+.cafe-list{
 	width: 100%;
 	height: 100%;
 	&-header{
