@@ -17,7 +17,6 @@ import TrainInfo from '~/components/widgets/trainInfo.vue'
 import LunchLibrary from '~/components/widgets/lunchLibrary.vue'
 import CafeList from '~/components/widgets/cafeList.vue'
 
-
 export default {
   components: {
     TrainInfo,

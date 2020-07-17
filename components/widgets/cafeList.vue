@@ -7,7 +7,10 @@
 			<div class="cafe-list-contents-top">
 				<div class="cafe-list-contents-top-title">近くのランチ営業店</div>
 			</div>
-      <div class="lunch-library-contents-main">
+      <div class="cafe-list-contents-main" v-if="!load">
+        <div v-for="cafe in cafeGroupList.doutor" :key="cafe.name" class="widget">
+          {{ cafe.name }}
+        </div>
       </div>
       <div class="cafe-list-contents-footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
@@ -23,13 +26,24 @@
         rangeList: [{distance: "300m", type: 1},{distance: "500m", type: 2},{distance: "1km", type: 3}],
         selectedRange: 2,
         load: true,
-        showRestaurant: [],
-        hiddenRestaurant: []
+        cafeGroupList: {},
 			}
 		},
 		methods: {
     },
     computed: {
+      getCafeGroupList() {
+        return this.$store.getters['cafeList/cafeGroupList']
+      }
+    },watch: {
+      getCafeGroupList(newStatus){
+        console.log(newStatus)
+        this.cafeGroupList = newStatus
+        const cafeList = this.$store.getters['cafeList/cafeList']
+        if(cafeList.length !=0){
+          this.load = false
+        }
+      }
     }
 	};
 </script>

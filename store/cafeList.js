@@ -31,13 +31,13 @@ export const mutations = {
         cafeGroupList.tullys.push(cafe)
       }
     });
-    state.cafeGroupList = cafeGroupList
     state.cafeList = res.rest
+    state.cafeGroupList = cafeGroupList
 	}
 }
 
 export const actions = {
-	//最寄カフェ取得
+	//カフェ取得
   async updateCafeList (context, storeOption) {
     const baseUrl = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     const setKey = `?keyid=${ process.env.GURUNAVI_API_KEY }`
