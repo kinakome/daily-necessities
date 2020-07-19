@@ -8,7 +8,7 @@
 				<div class="cafe-list-contents-top-title">近くのランチ営業店</div>
 			</div>
       <div class="cafe-list-contents-main" v-if="!load">
-        <div v-for="cafe in cafeGroupList.doutor" :key="cafe.name" class="widget">
+        <div v-for="cafe in cafeGroupList.doutor" :key="cafe.name" class="cafe-box">
           {{ cafe.name }}
         </div>
       </div>
@@ -174,6 +174,16 @@
       height: 80%;
       width: 100%;
       overflow: scroll;
+      display: flex;
+      // justify-content: space-around;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 3px;
+      .cafe-box{
+        height: 80px; 
+        width: 100px;
+        box-shadow: 0 0 5px $lightGray;
+      }
     }
     &-footer{
       height: 10%;
