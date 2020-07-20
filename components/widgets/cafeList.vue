@@ -177,12 +177,13 @@
       display: flex;
       // justify-content: space-around;
       flex-direction: column;
-      flex-wrap: wrap;
+      flex-wrap: column wrap;
       padding: 3px;
       .cafe-box{
-        height: 80px; 
-        width: 100px;
+        height: 70px; 
+        width: 130px;
         box-shadow: 0 0 5px $lightGray;
+        margin:0px 5px 10px 0px ;
       }
     }
     &-footer{

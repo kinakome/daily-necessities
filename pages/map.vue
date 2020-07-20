@@ -20,7 +20,7 @@
         <l-marker v-for="cafe of cafeList" :lat-lng="[cafe.latitude, cafe.longitude]" 
           :key="cafe.name" 
         >
-          <l-popup :content="cafe.name" ></l-popup>
+          <l-popup :content="cafe.name + '<br/>' + cafe.opentime + '<br/><a target=\'_blank\' href=\'' + cafe.url + '\'>ぐるなびで開く</a>'" ></l-popup>
         </l-marker>
       </l-map>
       <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-else></vue-loading>
