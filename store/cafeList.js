@@ -1,12 +1,14 @@
 //現在地
 export const state = () => ({
   cafeList: [],
-  cafeGroupList: []
+  cafeGroupList: [],
+  cafeLoad: false
 })
 
 export const getters = {
   cafeList: state => state.cafeList,
-	cafeGroupList: state => state.cafeGroupList,
+  cafeGroupList: state => state.cafeGroupList,
+  cafeLoad: state => state.cafeLoad,
 }
 
 export const mutations = {
@@ -33,6 +35,9 @@ export const mutations = {
     });
     state.cafeList = res.rest
     state.cafeGroupList = cafeGroupList
+  },
+  updateCafeLoad (state, status) {
+    state.cafeLoad = status
 	}
 }
 
@@ -51,5 +56,7 @@ export const actions = {
     const getUrl = encodeURI(baseUrl + setKey + setLatitude + setLongitude + setRange + setHit + setFreeword + setCondition) 
     const res = await this.$axios.$get(getUrl)
     context.commit("updateCafeList", res)
+    context.commit("updateCafeLoad", true)
+
   }
 }

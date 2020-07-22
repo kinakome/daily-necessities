@@ -5,7 +5,7 @@
         :zoom="zoom"
         :center="center"
         :options="{zoomControl: true}"
-        v-if="getLocation && stations.length !=0"
+        v-if="getLocation && stations.length !=0 && cafeLoad"
       >
         <l-tile-layer :url="url"></l-tile-layer>
         <l-marker :lat-lng="center">
@@ -14,7 +14,6 @@
         <l-marker v-for="station of stations" :lat-lng="[station.location.latitude, station.location.longitude]" 
           :key="station.name" 
         >
-          <!-- <l-popup :content="station.name + '駅'"></l-popup> -->
           <l-popup :content="station.name + '駅'" ></l-popup>
         </l-marker>
         <l-marker v-for="cafe of cafeList" :lat-lng="[cafe.latitude, cafe.longitude]" 
@@ -44,7 +43,8 @@ export default {
       center: [this.$store.state.location.latitude, this.$store.state.location.longitude],
       stations: this.$store.state.trainInfo.stationInfo,
       marker: {},
-      cafeList: this.$store.state.cafeList.cafeList
+      cafeList: this.$store.state.cafeList.cafeList,
+      cafeLoad: this.$store.state.cafeList.cafeLoad
     }
   },
   computed: {
@@ -83,8 +83,11 @@ export default {
       this.stations = stations
       this.$store.commit('trainInfo/updateStationInfo', stations)
     },
-    getcafe(newStatus) {
+    getCafeList(newStatus) {
+      console.log(newStatus)
       this.cafe = newStatus
+      this.cafeLoad = this.$store.state.cafeList.cafeLoad
+      console.log(this.cafeLoad)
     }
   }
 }

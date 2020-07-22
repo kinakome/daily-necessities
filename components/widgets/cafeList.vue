@@ -8,8 +8,8 @@
 				<div class="cafe-list-contents-top-title">近くのランチ営業店</div>
 			</div>
       <div class="cafe-list-contents-main" v-if="!load">
-        <div v-for="cafe in cafeGroupList.doutor" :key="cafe.name" class="cafe-box">
-          {{ cafe.name }}
+        <div v-for="(cafe, index) in cafeList" :key="cafe.name" class="cafe-box">
+          {{ cafe.name }}{{ index }}
         </div>
       </div>
       <div class="cafe-list-contents-footer">
@@ -21,12 +21,18 @@
 
 <script>
 	export default {
+    mounted(){
+      if(this.cafeList.length !=0){
+        this.load = false
+      }
+    },
 		data(){
 			return {
         rangeList: [{distance: "300m", type: 1},{distance: "500m", type: 2},{distance: "1km", type: 3}],
         selectedRange: 2,
         load: true,
-        cafeGroupList: {},
+        cafeGroupList: this.$store.state.cafeList.cafeGroupList,
+        cafeList: this.$store.state.cafeList.cafeList
 			}
 		},
 		methods: {
@@ -37,9 +43,12 @@
       }
     },watch: {
       getCafeGroupList(newStatus){
-        console.log(newStatus)
-        this.cafeGroupList = newStatus
         const cafeList = this.$store.getters['cafeList/cafeList']
+        if(this.load){
+          this.cafeGroupList = newStatus
+          this.cafeList = cafeList
+          console.log(this.cafeList)
+        }
         if(cafeList.length !=0){
           this.load = false
         }
