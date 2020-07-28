@@ -5,7 +5,7 @@
         :zoom="zoom"
         :center="center"
         :options="{zoomControl: true}"
-        v-if="getLocation && stations.length !=0"
+        v-if="getLocation && stations.length !=0 && cafeLoad"
       >
         <l-tile-layer :url="url"></l-tile-layer>
         <l-marker :lat-lng="center">
@@ -14,8 +14,12 @@
         <l-marker v-for="station of stations" :lat-lng="[station.location.latitude, station.location.longitude]" 
           :key="station.name" 
         >
-          <!-- <l-popup :content="station.name + '駅'"></l-popup> -->
           <l-popup :content="station.name + '駅'" ></l-popup>
+        </l-marker>
+        <l-marker v-for="cafe of cafeList" :lat-lng="[cafe.latitude, cafe.longitude]" 
+          :key="cafe.name" 
+        >
+          <l-popup :content="cafe.name + '<br/>' + cafe.opentime + '<br/><a target=\'_blank\' href=\'' + cafe.url + '\'>ぐるなびで開く</a>'" ></l-popup>
         </l-marker>
       </l-map>
       <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-else></vue-loading>
@@ -38,7 +42,9 @@ export default {
       zoom: 17,
       center: [this.$store.state.location.latitude, this.$store.state.location.longitude],
       stations: this.$store.state.trainInfo.stationInfo,
-      marker: {}
+      marker: {},
+      cafeList: this.$store.state.cafeList.cafeList,
+      cafeLoad: this.$store.state.cafeList.cafeLoad
     }
   },
   computed: {
@@ -47,6 +53,9 @@ export default {
     },
     getStation() {
       return this.$store.getters['trainInfo/stations']
+    },
+    getCafeList() {
+      return this.$store.getters['cafeList/cafeList']
     }
   },
   watch: {
@@ -73,6 +82,12 @@ export default {
       })
       this.stations = stations
       this.$store.commit('trainInfo/updateStationInfo', stations)
+    },
+    getCafeList(newStatus) {
+      console.log(newStatus)
+      this.cafe = newStatus
+      this.cafeLoad = this.$store.state.cafeList.cafeLoad
+      console.log(this.cafeLoad)
     }
   }
 }

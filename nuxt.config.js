@@ -63,7 +63,8 @@ module.exports = {
     FIREBASE_DATABASEURL: process.env.FIREBASE_DATABASEURL,
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
-    GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY
+    GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY,
+    SEARCH_CAFE_LIST: process.env.SEARCH_CAFE_LIST 
   },
   manifest: {
     name: "Daily Necessities",
