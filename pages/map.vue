@@ -85,7 +85,7 @@ export default {
     },
     getCafeList(newStatus) {
       console.log(newStatus)
-      this.cafe = newStatus
+      this.cafeList = newStatus
       this.cafeLoad = this.$store.state.cafeList.cafeLoad
       console.log(this.cafeLoad)
     }
