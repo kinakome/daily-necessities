@@ -1,7 +1,7 @@
 <template>
 	<div class="lunch-library">
 		<div class="lunch-library-header">
-			Lunch Library
+			ランチ営業店
 		</div>
 		<div class="lunch-library-contents">
 			<div class="lunch-library-contents-top">

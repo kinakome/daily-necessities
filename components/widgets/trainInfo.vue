@@ -1,7 +1,7 @@
 <template>
 	<div class="train-info">
 		<div class="train-info-header">
-			Nearby Station
+			駅と路線
 		</div>
 		<div class="train-info-contents">
 			<div class="train-info-contents-left">
