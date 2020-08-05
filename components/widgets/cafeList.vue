@@ -5,7 +5,8 @@
 		</div>
 		<div class="cafe-list-contents">
 			<div class="cafe-list-contents-top">
-				<div class="cafe-list-contents-top-title">左右にスワイプ</div>
+				<div class="cafe-list-contents-top-title">上下にスクロール
+        </div>
 			</div>
       <div class="cafe-list-contents-main" v-if="!load">
         <div v-for="cafe in cafeList" :key="cafe.name" class="cafe-box">
