@@ -1,11 +1,11 @@
 <template>
 	<div class="train-info">
 		<div class="train-info-header">
-			Nearby Station
+			駅と路線
 		</div>
 		<div class="train-info-contents">
 			<div class="train-info-contents-left">
-				<div class="train-info-contents-left-title">現在地から近い駅</div>
+				<div class="train-info-contents-left-title">スワイプして切替</div>
 				<!-- <div class="train-info-contents-left-title">駅名をスワイプして切替</div> -->
 				<div class="train-info-contents-left-stations">
 					<div class="arrow-up" @click="selectUp"></div>

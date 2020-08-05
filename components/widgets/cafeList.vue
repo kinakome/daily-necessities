@@ -5,11 +5,21 @@
 		</div>
 		<div class="cafe-list-contents">
 			<div class="cafe-list-contents-top">
-				<div class="cafe-list-contents-top-title">近くのランチ営業店</div>
+				<div class="cafe-list-contents-top-title">上下にスクロール
+        </div>
 			</div>
       <div class="cafe-list-contents-main" v-if="!load">
-        <div v-for="(cafe, index) in cafeList" :key="cafe.name" class="cafe-box">
-          {{ cafe.name }}{{ index }}
+        <div v-for="cafe in cafeList" :key="cafe.name" class="cafe-box">
+          <a :href=cafe.url target="_blank" class="cafe-box__link">
+            <div class="cafe-box__title">
+              {{ cafe.name }}
+            </div>
+            <div class="cafe-box__content">
+              営業時間：{{ cafe.opentime }}
+              <br>
+              <!-- <a :href=cafe.url target="_blank">ぐるなびで開く</a> -->
+            </div>
+          </a>
         </div>
       </div>
       <div class="cafe-list-contents-footer">
@@ -184,15 +194,44 @@
       width: 100%;
       overflow: scroll;
       display: flex;
-      // justify-content: space-around;
-      flex-direction: column;
-      flex-wrap: column wrap;
+      justify-content: space-around;
+      // flex-direction: column;
+      // flex-wrap: column wrap;
+      flex-wrap: wrap;
       padding: 3px;
       .cafe-box{
-        height: 70px; 
-        width: 130px;
+        padding: 5px;
+        height: 75px; 
+        width: 180px;
         box-shadow: 0 0 5px $lightGray;
         margin:0px 5px 10px 0px ;
+        transition: .3s;
+        &__title{
+          font-size: 14px;
+          height: 33px;
+          overflow: hidden;
+        }
+        &__content{
+          font-size: 11px;
+          height: 33px;
+          overflow: hidden;
+        }
+        &__link{
+          display: block;
+          height: 100%;
+          width: 100%;
+          color: $black;
+        }
+        @include pc {
+          &:hover{
+            background-color: $lightGray;
+          }
+        }
+        @include mobile {
+          &:active{
+            background-color: $lightGray;
+          }
+        }
       }
     }
     &-footer{

@@ -1,11 +1,12 @@
 <template>
 	<div class="lunch-library">
 		<div class="lunch-library-header">
-			Lunch Library
+			ランチ営業店
 		</div>
 		<div class="lunch-library-contents">
 			<div class="lunch-library-contents-top">
-				<div class="lunch-library-contents-top-title">近くのランチ営業店</div>
+        <!-- スマホとPCで切替したい -->
+				<div class="lunch-library-contents-top-title">スワイプして切替</div>
         <div class="arrow-left" @click="selectLeft"></div>
         <div class="arrow-right" @click="selectRight"></div>
         <div class="lunch-library-contents-top-distance">        
