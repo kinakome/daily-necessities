@@ -6,9 +6,6 @@
         </compnent>
     </div>
     <div class="widget"></div>
-    <div class="widget"></div>
-    <div class="widget"></div>
-    <div class="widget"></div>
   </div>
 </template>
 
@@ -40,6 +37,7 @@ export default {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-around;
+  align-content: flex-start;
   margin: 0 auto;
 
   .widget {
