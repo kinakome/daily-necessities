@@ -8,8 +8,9 @@
         <span>Daily Necessities !</span>
       </div>
       <div class="header-right">
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-if="isLoggedIn"></nuxt-link>
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-else></nuxt-link>
+        <!-- <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-if="isLoggedIn"></nuxt-link>
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-else></nuxt-link> -->
+        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/position.svg')" @click.native="updatePath"></nuxt-link>
       </div>
     </div>
     <HeaderNav />
