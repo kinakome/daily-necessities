@@ -61,7 +61,8 @@ export default {
     clickAction() {
       if(window.innerWidth <= 720){
         if(this.url == this.$store.state.currentPath && this.open == false){
-          this.$parent.$data.pStyle.height = '160px'
+          this.$parent.$data.pStyle.height = '110px'
+          // this.$parent.$data.pStyle.height = '160px'
           this.open = true
           this.$store.commit('updateButtonStatus', true)
         }else if(this.url == this.$store.state.currentPath && this.open == true){
@@ -122,7 +123,8 @@ export default {
 .header-nav-button{
   text-align: center;
   height: 60px;
-  width: 32.7%;
+  width: 49%;
+  // width: 32.7%;
   background-color: $lightGray;
   font-size: 30px;
   overflow: hidden;

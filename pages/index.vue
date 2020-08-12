@@ -6,9 +6,6 @@
         </compnent>
     </div>
     <div class="widget"></div>
-    <div class="widget"></div>
-    <div class="widget"></div>
-    <div class="widget"></div>
   </div>
 </template>
 
@@ -31,7 +28,7 @@ export default {
 
 .container {
   clear: both;
-  min-height: 100vh;
+  // min-height: 100vh;
   width: 100%;
   display: flex;
   /* justify-content: space-between; */
@@ -40,6 +37,7 @@ export default {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-around;
+  align-content: flex-start;
   margin: 0 auto;
 
   .widget {

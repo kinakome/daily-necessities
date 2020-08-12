@@ -2,8 +2,8 @@
 	<div class="header-nav" ref="headerButton" :style='pStyle' >
 		<HeaderNavButton title="Nearby Info" explanation="近隣情報" />
 		<HeaderNavButton title="Map" explanation="マップを表示" url="/map"/>
-		<HeaderNavButton title="My Page" explanation="マイページ" url="/signIn" v-if="isLoggedIn"/>
-		<HeaderNavButton title="Sign In" explanation="サインイン" url="/signIn" v-else/>
+		<!-- <HeaderNavButton title="My Page" explanation="マイページ" url="/signIn" v-if="isLoggedIn"/>
+		<HeaderNavButton title="Sign In" explanation="サインイン" url="/signIn" v-else/> -->
 	</div>
 </template>
 <script>
