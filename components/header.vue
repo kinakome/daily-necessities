@@ -11,6 +11,7 @@
         <!-- <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-if="isLoggedIn"></nuxt-link>
         <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-else></nuxt-link> -->
         <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/position.svg')" @click.native="updatePath"></nuxt-link>
+        <div class="header-right__char">位置情報更新</div>
       </div>
     </div>
     <HeaderNav />
@@ -118,10 +119,11 @@ header{
       padding: 13px 46px 0px 0px;
       @include mobile {
       padding: 15px 16px 0px 0px;
+      position: relative;
       }
       img{
-        width: 45.17px;
-        height: 49px;
+        width: 40px;
+        height: 44px;
         transition: .3s;
         &:hover{
           opacity: 0.7;
@@ -130,6 +132,11 @@ header{
           width: 30px;
           height: 30px;
         }
+      }
+      &__char{
+        position: absolute;
+        font-size: 10px;
+        right: 35px;
       }
     }
   }
