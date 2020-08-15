@@ -19,6 +19,17 @@ export default {
     TrainInfo,
     LunchLibrary,
     CafeList
+  },  
+  computed: {
+    getLocationReload() {
+      return this.$store.getters['locationReload']
+    },
+  },
+  watch: {
+    getLocationReload(newStatus) {
+      this.center = [this.$store.state.location.latitude, this.$store.state.location.longitude]
+      this.$store.commit('updateLocationReload', false)
+    }
   }
 }
 </script>

@@ -71,6 +71,7 @@ export default {
       var res = confirm("位置情報を更新しますか？");
       if( res == true ) {
         this.getStation()
+        this.$store.commit('updateLocationReload', true)
       }
     },
     //近隣駅取得メソッド
