@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if='!reloadFlg'>
     <!-- storeからトップ画面に表示するウィジェット名を受け取り描画 -->
     <div v-for="(widget, index) in $store.state.widgetList" :key="index" class="widget">
         <compnent :is=widget>
@@ -19,7 +19,12 @@ export default {
     TrainInfo,
     LunchLibrary,
     CafeList
-  },  
+  },
+  data() {
+    return {
+      reloadFlg: false
+    }
+  },
   computed: {
     getLocationReload() {
       return this.$store.getters['locationReload']
@@ -28,6 +33,8 @@ export default {
   watch: {
     getLocationReload(newStatus) {
       this.center = [this.$store.state.location.latitude, this.$store.state.location.longitude]
+      this.reloadFlg = newStatus
+      console.log(this.reloadFlg)
       this.$store.commit('updateLocationReload', false)
     }
   }

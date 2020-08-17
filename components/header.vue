@@ -67,7 +67,6 @@ export default {
       this.$store.commit('updatePath', this.loginUrl)
     },
     locationReload(){
-      console.log("aaaaa")
       var res = confirm("位置情報を更新しますか？");
       if( res == true ) {
         this.getStation()
