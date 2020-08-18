@@ -5,7 +5,7 @@
 		</div>
 		<div class="train-info-contents">
 			<div class="train-info-contents-left">
-				<div class="train-info-contents-left-title">スワイプして切替</div>
+				<div class="train-info-contents-left-title">左右にスワイプ</div>
 				<!-- <div class="train-info-contents-left-title">駅名をスワイプして切替</div> -->
 				<div class="train-info-contents-left-stations">
 					<div class="arrow-up" @click="selectUp"></div>

@@ -7,14 +7,16 @@ export const state = () => ({
 	},
 	widgetList: ["TrainInfo", "LunchLibrary", "CafeList"],
 	buttonStatus: true,
-	getLocation: false
+	getLocation: false,
+	locationReload: false
 })
 
 export const getters = {
 	currentPath: state => state.currentPath,
 	location: state => state.location,
 	buttonStatus: state => state.buttonStatus,
-	getLocation: state => state.getLocation
+	getLocation: state => state.getLocation,
+	locationReload: state => state.locationReload
 }
 
 //現在地書き換え
@@ -30,6 +32,9 @@ export const mutations = {
 	},
 	updateButtonStatus (state, status) {
 		state.buttonStatus = status
+	},
+	updateLocationReload (state, status) {
+		state.locationReload = status
 	}
 }
 
