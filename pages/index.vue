@@ -5,7 +5,7 @@
         <compnent :is=widget>
         </compnent>
     </div>
-    <div class="widget"></div>
+    <div class="widget preparation">準備中</div>
   </div>
 </template>
 
@@ -66,6 +66,9 @@ export default {
     @include mobile {
       width: 100%;
     }
+  }
+  .preparation{
+    padding: 20px;
   }
 }
 

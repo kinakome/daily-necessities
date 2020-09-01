@@ -8,10 +8,8 @@
         <span>Daily Necessities !</span>
       </div>
       <div class="header-right">
-        <!-- <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/logout.svg')" @click.native="signOut" v-if="isLoggedIn"></nuxt-link>
-        <nuxt-link :to="loginUrl" tag="img" :src="require('@/assets/img/login.svg')" @click.native="updatePath" v-else></nuxt-link> -->
-        <img :src="require('@/assets/img/position.svg')" @click="locationReload">
-        <div class="header-right__char">位置情報更新</div>
+        <img :src="require('@/assets/img/location.svg')" @click="locationReload">
+        <div class="header-right__char">更新</div>
       </div>
     </div>
     <HeaderNav />
@@ -29,13 +27,6 @@ export default {
   mounted() {
     this.getStation()
     this.$store.dispatch('authenticated/nuxtClientInit')
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.$store.dispatch("authenticated/gotUser", user)
-      } else {
-        // if(route.name !== "login") redirect("/login")
-      }
-    })
   },
   components: {
     HeaderNav
@@ -46,9 +37,7 @@ export default {
     }
   },
   methods: {
-    //クリック時storeのパスを上書き
     updatePath() {
-      //クリック時にスクロールを元に戻す
       window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -69,11 +58,9 @@ export default {
     locationReload(){
       var res = confirm("位置情報を更新しますか？");
       if( res == true ) {
-        this.getStation()
-        this.$store.commit('updateLocationReload', true)
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
       }
     },
-    //近隣駅取得メソッド
     async getStation() {
       if (process.client) {
         if (!navigator.geolocation) {
@@ -88,15 +75,11 @@ export default {
         }
         this.$store.dispatch('lunchLibrary/updateRestaurantAction', grunaviOption)
         this.$store.dispatch('cafeList/updateCafeList', grunaviOption)
-
       }
     },
-    //geolocation
     getLocation() {
       return new Promise((resolve, reject) => {
-        // 現在地を取得
         navigator.geolocation.getCurrentPosition(
-          // 取得成功した場合
           (position) => {
             const location = {
               latitude: position.coords.latitude,
@@ -105,16 +88,15 @@ export default {
             this.$store.commit('updateLocation', location)
             resolve(location);
           },
-          // 取得失敗した場合
           (error) => {
             switch (error.code) {
-              case 1: //PERMISSION_DENIED
+              case 1: 
                 alert("位置情報の利用が許可されていません");
                 break;
-              case 2: //POSITION_UNAVAILABLE
+              case 2: 
                 alert("現在位置が取得できませんでした");
                 break;
-              case 3: //TIMEOUT
+              case 3: 
                 alert("タイムアウトになりました");
                 break;
               default:
@@ -184,7 +166,7 @@ header{
       padding: 13px 46px 0px 0px;
       @include mobile {
       padding: 15px 16px 0px 0px;
-      position: relative;
+      // position: relative;
       }
       img{
         width: 40px;
@@ -194,14 +176,17 @@ header{
           opacity: 0.7;
         }
         @include mobile {
-          width: 30px;
-          height: 30px;
+          width: 25px;
+          height: 25px;
         }
       }
       &__char{
-        position: absolute;
         font-size: 10px;
         right: 35px;
+        margin: 3px 10px 10px 10px;
+        @include mobile {
+          display: none;
+        }
       }
     }
   }
