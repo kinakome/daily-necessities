@@ -1,14 +1,14 @@
 <template>
 	<div class="cafe-list">
-		<div class="cafe-list-header">
+		<div class="cafe-list__header">
 			大手カフェチェーン
 		</div>
-		<div class="cafe-list-contents">
-			<div class="cafe-list-contents-top">
-				<div class="cafe-list-contents-top-title">上下にスクロール
+		<div class="cafe-list__contents">
+			<div class="cafe-list__contents--top">
+				<div class="cafe-list__contents--top title">上下にスクロール
         </div>
 			</div>
-      <div class="cafe-list-contents-main" v-if="!load">
+      <div class="cafe-list__contents--main" v-if="!load">
         <div v-for="cafe in cafeList" :key="cafe.name" class="cafe-box">
           <a :href=cafe.url target="_blank" class="cafe-box__link">
             <div class="cafe-box__title">
@@ -22,7 +22,7 @@
           </a>
         </div>
       </div>
-      <div class="cafe-list-contents-footer">
+      <div class="cafe-list__contents--footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
       </div>
 		</div>
@@ -72,7 +72,7 @@
 .cafe-list{
 	width: 100%;
 	height: 100%;
-	&-header{
+	&__header{
 		width: 100%;
 		height: 50px;
 		background-color: $black;
@@ -82,20 +82,20 @@
 		font-size: 25px;
 		padding-top: 12px;
 	}
-	&-contents{
+	&__contents{
 		width: 100%;
 		height: calc(100% - 50px);
 		font-family: 'Noto Sans JP', sans-serif;
     font-weight: 500;
     padding:10px;
     position: relative;
-		&-top{
+		&--top{
 			width: 100%;
 			height: 10%;
 			float: left;
 			position: relative;
       @include clearfix;
-			&-title{
+			.title{
 				width: 30%;
 				text-align: left;
 				font-size: 12px;
@@ -105,91 +105,8 @@
           display: none;
         }
       }
-      .arrow{
-        &-left{
-          position: absolute;
-          top: 2px;
-          left: 260px;
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 7px 20px 7px 0;
-          border-color: transparent $gray transparent transparent;
-          transition: .3s;
-          @include pc {
-            &:hover{
-            border-color: transparent $lightGray transparent transparent;
-            }
-          }
-          @include mobile {
-            &:active{
-              border-color: transparent $lightGray transparent transparent;
-            }
-            left: 10%;
-          }
-        }
-        &-right{
-          position: absolute;
-          top: 2px;
-          left: 290px;
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 7px 0 7px 20px;
-          border-color: transparent transparent transparent $gray;
-          transition: .3s;
-          @include pc {
-            &:hover{
-              border-color: transparent transparent transparent $lightGray;
-            }
-          }
-          @include mobile {
-            &:active{
-              border-color: transparent transparent transparent $lightGray;
-            }
-            left: calc(10% + 30px);
-          }
-
-        }
-      }
-      &-distance{
-        width: 50%;
-        float: right;
-        @include mobile {
-          width: 70%;
-        }
-        ul{
-          list-style: none;
-          float: right;
-          @include clearfix;
-          li{
-            font-size: 13px;
-            display: inline-block;
-            width: 70px;
-            padding: 3px;
-            margin-left: 5px;
-            box-shadow: 0 0 5px $lightGray;
-            color: $gray;
-            transition: .3s;
-            &:hover{
-              background-color: $lightGray;
-            }
-            @include mobile {
-              font-size: 12px;
-              width: 50px;
-            }
-          }
-          .selected{
-            color: $white;
-            background-color: $gray;
-            &:hover{
-              background-color: $gray;
-            }
-          }
-        }
-      }
-		}
-    &-main{
+    }
+    &--main{
       height: 80%;
       width: 100%;
       overflow: scroll;
@@ -234,7 +151,7 @@
         }
       }
     }
-    &-footer{
+    &--footer{
       height: 10%;
       color: $lightGray;
       font-size: 10px;

@@ -11,11 +11,11 @@
         <l-marker :lat-lng="center">
           <l-popup :content="'現在地'"></l-popup>
         </l-marker>
-        <l-marker v-for="station of stations" :lat-lng="[station.location.latitude, station.location.longitude]" 
+        <!-- <l-marker v-for="station of stations" :lat-lng="[station.location.latitude, station.location.longitude]" 
           :key="station.name" 
         >
           <l-popup :content="station.name + '駅'" ></l-popup>
-        </l-marker>
+        </l-marker> -->
         <l-marker v-for="cafe of cafeList" :lat-lng="[cafe.latitude, cafe.longitude]" 
           :key="cafe.name" 
         >

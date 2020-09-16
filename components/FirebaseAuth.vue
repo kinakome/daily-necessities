@@ -20,14 +20,10 @@ export default {
             // authProviders.Facebook,
           ],
           callbacks: {
-            // Nuxtのローカルサーバーで起こるCORSエラーのためこのように設定。本番環境では不要
-            // signInSuccessWithAuthResult: (authResult) => {
-            //   window.location.href = "/"
-            //   return false
-            // }
+
           },
           signInSuccessUrl: '/',
-          signInFlow: 'popup', // ログインフロー設定。Nuxtのローカルサーバーで起こるCORSエラーがあるのでpopupがオススメです。
+          signInFlow: 'popup', 
         }
 
         ui.start('#firebaseui-auth-container', config)

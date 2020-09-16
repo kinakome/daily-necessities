@@ -1,21 +1,21 @@
 <template>
 	<div class="lunch-library">
-		<div class="lunch-library-header">
+		<div class="lunch-library__header">
 			ランチ営業店
 		</div>
-		<div class="lunch-library-contents">
-			<div class="lunch-library-contents-top">
+		<div class="lunch-library__contents">
+			<div class="lunch-library__contents--top">
         <!-- スマホとPCで切替したい -->
-				<div class="lunch-library-contents-top-title">左右にスワイプ</div>
+				<div class="lunch-library__contents--top title">左右にスワイプ</div>
         <div class="arrow-left" @click="selectLeft"></div>
         <div class="arrow-right" @click="selectRight"></div>
-        <div class="lunch-library-contents-top-distance">        
+        <div class="lunch-library__contents--top distance">        
           <ul>
             <li v-for='(range, index) in rangeList' :key=range.distance :class="{'selected': index==(selectedRange - 1)}" @click="selectRange(range)">{{range.distance}}</li>
           </ul>
         </div>
 			</div>
-      <div class="lunch-library-contents-main">
+      <div class="lunch-library__contents--main">
         <vue-loading type="spin" color="#333" :size="{ width: '100px', height: '100px' }" v-show="load"></vue-loading>
         <v-touch v-on:swipeleft="selectLeft" v-on:swiperight="selectRight">
           <transition-group name="restaurant-list" tag="ul">
@@ -23,19 +23,19 @@
               <div class="restaurant-box">
                 <img src="@/assets/img/no-image.svg" :class="{'selected-image': index==1}" v-if='restaurant.image_url.shop_image1 == ""'>
                 <img :src=restaurant.image_url.shop_image1 :class="{'selected-image': index==1}" v-else>
-                <div class="restaurant-box-info restaurant-box-info__selected" v-if='index == 1'>
+                <div class="restaurant-box__info restaurant-box__info--selected" v-if='index == 1'>
                   <span id="restaurant-name">{{restaurant.name}}</span>
                   <span id="opentime">営業時間：{{restaurant.opentime}}</span>
                   <span id="lunch-price" v-if='restaurant.lunch!=""'>ランチ価格：{{restaurant.lunch}}円程度</span>
                   <a :href=restaurant.url target="_blank">ぐるなびで開く</a>
                 </div>
-                <div class="restaurant-box-info" v-else>{{restaurant.name}}</div>
+                <div class="restaurant-box__info" v-else>{{restaurant.name}}</div>
               </div>
             </li>
           </transition-group>
         </v-touch>
       </div>
-      <div class="lunch-library-contents-footer">
+      <div class="lunch-library__contents--footer">
         Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
       </div>
 		</div>
@@ -104,7 +104,7 @@
 .lunch-library{
 	width: 100%;
 	height: 100%;
-	&-header{
+	&__header{
 		width: 100%;
 		height: 50px;
 		background-color: $black;
@@ -114,20 +114,20 @@
 		font-size: 25px;
 		padding-top: 12px;
 	}
-	&-contents{
+	&__contents{
 		width: 100%;
 		height: calc(100% - 50px);
 		font-family: 'Noto Sans JP', sans-serif;
     font-weight: 500;
     padding:10px;
     position: relative;
-		&-top{
+		&--top{
 			width: 100%;
 			height: 10%;
 			float: left;
 			position: relative;
       @include clearfix;
-			&-title{
+			.title{
 				width: 30%;
 				text-align: left;
 				font-size: 12px;
@@ -184,7 +184,7 @@
 
         }
       }
-      &-distance{
+      .distance{
         width: 50%;
         float: right;
         @include mobile {
@@ -221,7 +221,7 @@
         }
       }
 		}
-    &-main{
+    &--main{
       height: 80%;
       width: 100%;
       overflow: scroll;
@@ -276,7 +276,7 @@
               margin-left: calc(50% - 60px);
             }
           }
-          &-info{
+          &__info{
             padding: 3px;
             height: 50px;
             background-color: $baseBlack;
@@ -288,7 +288,7 @@
             @include mobile {
               height: 70px;
             }
-            &__selected{
+            &--selected{
               height: 100px;
               #restaurant-name{
                 display: block;
@@ -398,7 +398,7 @@
         // }
       }
     }
-    &-footer{
+    &--footer{
       height: 10%;
       color: $lightGray;
       font-size: 10px;

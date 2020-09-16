@@ -1,19 +1,18 @@
 <template>
 	<div class="train-info">
-		<div class="train-info-header">
-			近隣の駅
+		<div class="train-info__header">
+			近くの駅
 		</div>
-		<div class="train-info-contents">
-			<div class="train-info-contents-left">
-				<div class="train-info-contents-left-title">左右にスワイプ</div>
-				<!-- <div class="train-info-contents-left-title">駅名をスワイプして切替</div> -->
-				<div class="train-info-contents-left-stations">
+		<div class="train-info__contents">
+			<div class="train-info__contents--left">
+				<div class="left__title">上下にスワイプ</div>
+				<div class="left__stations">
 					<div class="arrow-up" @click="selectUp"></div>
 					<div class="arrow-down" @click="selectDown"></div>
 					<div class="station-box">
-						<div class="station-box-item"></div>
-						<div class="station-box-item selected-box"></div>
-						<div class="station-box-item"></div>
+						<div class="station-box__item"></div>
+						<div class="station-box__item selected"></div>
+						<div class="station-box__item"></div>
 					</div>
 					<v-touch v-on:swipeup="selectUp" v-on:swipedown="selectDown">
 						<transition-group name="station-list" tag="ul">
@@ -22,7 +21,7 @@
 					</v-touch>
 				</div>
 			</div>
-			<div class="train-info-contents-right">
+			<div class="train-info__contents--right">
 				<ul v-if="!load">
 					<li v-for="(train, index) in selectedStation.train" :key=train.line :class="{'selected-station': index==1}">
 						<div class="line-name">{{train.line}}</div> 
@@ -105,7 +104,7 @@
 .train-info{
 	width: 100%;
 	height: 100%;
-	&-header{
+	&__header{
 		width: 100%;
 		height: 50px;
 		background-color: $black;
@@ -115,126 +114,128 @@
 		font-size: 25px;
 		padding-top: 12px;
 	}
-	&-contents{
+	&__contents{
 		width: 100%;
 		height: calc(100% - 50px);
 		font-family: 'Noto Sans JP', sans-serif;
 		font-weight: 500;
-		&-left{
+		&--left{
 			width: 40%;
 			height: 100%;
 			float: left;
 			position: relative;
-			&-title{
-				position: absolute;
-				height: 20px;
-				width: 100%;
-				text-align: left;
-				padding:10px 0 0 10px;
-				font-size: 12px;
-				color: $gray;
-			}
-			&-stations{
-				height: 100%;
-				padding: 20px  0px;
-				position: relative;
-				.station-box{
-					height: 100%;
+			.left{
+				&__title{
+					position: absolute;
+					height: 20px;
 					width: 100%;
-					&-item{
-						height: 30%;
+					text-align: left;
+					padding:10px 0 0 10px;
+					font-size: 12px;
+					color: $gray;
+				}
+				&__stations{
+					height: 100%;
+					padding: 20px  0px;
+					position: relative;
+					.station-box{
+						height: 100%;
 						width: 100%;
+						&__item{
+							height: 30%;
+							width: 100%;
+						}
+						.selected{
+							height: 40%;
+							background-color: $gray;
+							font-weight: 700;
+							color: $white;
+							font-size: 20px;
+						}
 					}
-					.selected-box{
-						height: 40%;
-						background-color: $gray;
-						font-weight: 700;
-						color: $white;
+					ul{
+						list-style: none;
+						float: left;
+						position: absolute;
+						top: 30px;
+						left: 90px;
+						z-index: 30;
+						height: calc(100% - 40px);
 						font-size: 20px;
-					}
-				}
-				ul{
-					list-style: none;
-					float: left;
-					position: absolute;
-					top: 30px;
-					left: 90px;
-					z-index: 30;
-					height: calc(100% - 40px);
-					font-size: 20px;
-					@include mobile{
-						width: 100%;
-						left: 0px;
-						font-size: 16px;
-					}
-					li{
-						text-align: center;
-						display: block;
-						color: $lightGray;
-						width: 100%;
-						height: 30%;
-						padding-top: 13px;
-						@include mobile {
-							padding-left: 30px;
+						@include mobile{
+							width: 100%;
+							left: 0px;
+							font-size: 16px;
+						}
+						li{
+							text-align: center;
+							display: block;
+							color: $lightGray;
+							width: 100%;
+							height: 30%;
+							padding-top: 13px;
+							@include mobile {
+								padding-left: 30px;
+							}
+						}
+						.selected-station{
+							font-weight: 700;
+							color: $white;
+							height: 40%;
+							padding-top: 20px;
 						}
 					}
-					.selected-station{
-						font-weight: 700;
-						color: $white;
-						height: 40%;
-						padding-top: 20px;
-					}
-				}
-				.arrow-up{
-					position: absolute;
-					top: 90px;
-					left: 15px;
-					display: inline-block;
-					width: 0;
-					height: 0;
-					border-style: solid;
-					border-width: 0 10px 12px 10px;
-					border-color: transparent transparent $white transparent;
-					transition: .3s;
-					@include mobile{
-						left: 10px;
-						&:active{
-							border-color: transparent transparent $lightGray transparent;
+					.arrow-up{
+						position: absolute;
+						top: 90px;
+						left: 15px;
+						display: inline-block;
+						width: 0;
+						height: 0;
+						border-style: solid;
+						border-width: 0 10px 12px 10px;
+						border-color: transparent transparent $white transparent;
+						transition: .3s;
+						@include mobile{
+							left: 10px;
+							&:active{
+								border-color: transparent transparent $lightGray transparent;
+							}
+						}
+						@include pc{
+							&:hover{
+								border-color: transparent transparent $lightGray transparent;
+							}
 						}
 					}
-					@include pc{
-						&:hover{
-							border-color: transparent transparent $lightGray transparent;
+					.arrow-down{
+						position: absolute;
+						bottom: 90px;
+						left: 15px;
+						width: 0;
+						height: 0;
+						border-style: solid;
+						border-width: 12px 10px 0 10px;
+						border-color: $white transparent transparent transparent;
+						@include mobile{
+							left: 10px;
+							&:active{
+								border-color: $lightGray transparent transparent transparent;
+							}
+						}
+						@include pc{
+							&:hover{
+								border-color: $lightGray transparent transparent transparent;
+							}
 						}
 					}
-				}
-				.arrow-down{
-					position: absolute;
-					bottom: 90px;
-					left: 15px;
-					width: 0;
-					height: 0;
-					border-style: solid;
-					border-width: 12px 10px 0 10px;
-					border-color: $white transparent transparent transparent;
-					@include mobile{
-						left: 10px;
-						&:active{
-							border-color: $lightGray transparent transparent transparent;
-						}
+					.station-list-move {
+						transition: transform 1s;
 					}
-					@include pc{
-						&:hover{
-							border-color: $lightGray transparent transparent transparent;
-						}
-					}
-				}
-				.station-list-move {
-					transition: transform 1s;
 				}
 			}
 		}
-		&-right{
+		&--right{
 			border: solid 1px $gray;
 			width: calc(60% - 10px);
 			height: calc(100% - 20px);

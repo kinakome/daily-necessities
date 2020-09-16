@@ -1,15 +1,15 @@
 <template>
   <header>
     <div class="header">
-      <div class="header-left">
+      <div class="header__left">
         <img src="@/assets/img/site-icon.png">
       </div>
       <div class="header-center">
         <span>Daily Necessities !</span>
       </div>
-      <div class="header-right">
+      <div class="header__right">
         <img :src="require('@/assets/img/location.svg')" @click="locationReload">
-        <div class="header-right__char">更新</div>
+        <div class="header__right--update">更新</div>
       </div>
     </div>
     <HeaderNav />
@@ -134,7 +134,7 @@ header{
     @include mobile {
       height: 60px;
     }
-    &-left{
+    &__left{
       float: left;
       padding: 13px 0px 0px 46px ;
       img{
@@ -161,7 +161,7 @@ header{
         font-size: 28px ;
       }
     }
-    &-right{
+    &__right{
       float: right;
       padding: 13px 46px 0px 0px;
       @include mobile {
@@ -180,7 +180,7 @@ header{
           height: 25px;
         }
       }
-      &__char{
+      &--update{
         font-size: 10px;
         right: 35px;
         margin: 3px 10px 10px 10px;
