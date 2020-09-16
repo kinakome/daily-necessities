@@ -1,4 +1,4 @@
-import { auth } from '~/plugins/firebase'
+import { auth } from "~/plugins/firebase"
 
 export default function ({ route, store, redirect }) {
   auth.onAuthStateChanged((user) => {

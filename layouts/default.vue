@@ -1,21 +1,21 @@
 <template>
-	<div  ontouchstart="">
-		<Header />
-		<main>
+  <div ontouchstart="">
+    <Header />
+    <main>
       <transition mode="out-in" name="page-transition">
         <nuxt />
       </transition>
-		</main>
-	</div>
+    </main>
+  </div>
 </template>
 
 <script>
-	import Header from "@/components/header.vue"; // headerをインポート
-	export default {
-		components: {
-      Header
-    },		
-	};
+import Header from "@/components/header.vue" // headerをインポート
+export default {
+  components: {
+    Header,
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -26,18 +26,18 @@ main {
   min-height: 600px;
   background-color: $white;
   text-align: center;
-	padding: 180px 46px 30px 46px;
+  padding: 180px 46px 30px 46px;
   z-index: 10;
-	position: relative;
-	@include mobile {
-		width: calc(100% - 40px);
-		padding: 140px 20px 30px 20px;
-	}
+  position: relative;
+  @include mobile {
+    width: calc(100% - 40px);
+    padding: 140px 20px 30px 20px;
+  }
 }
 
 .page-transition-enter {
   // transform: translate(-100px, 0);
-  transform: translate(0,200px);
+  transform: translate(0, 200px);
   opacity: 0;
 }
 .page-transition-enter-to {
@@ -52,10 +52,10 @@ main {
 }
 .page-transition-leave-to {
   // transform: translate(100px, 0);
-  transform: translate(0,-100px);
+  transform: translate(0, -100px);
   opacity: 0;
 }
 .page-transition-leave-active {
-  transition: all .5s 0s ease;
+  transition: all 0.5s 0s ease;
 }
 </style>
