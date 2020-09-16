@@ -3,15 +3,17 @@
 </template>
 
 <script>
-import { auth, authProviders } from '~/plugins/firebase'
-import * as firebaseui from 'firebaseui'
+import { auth, authProviders } from "~/plugins/firebase"
+import * as firebaseui from "firebaseui"
 
 export default {
-  name: 'FirebaseAuth',
+  name: "FirebaseAuth",
   mounted() {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged((user) => {
       if (!user) {
-        const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
+        const ui =
+          firebaseui.auth.AuthUI.getInstance() ||
+          new firebaseui.auth.AuthUI(auth)
 
         const config = {
           signInOptions: [
@@ -19,16 +21,14 @@ export default {
             authProviders.Google,
             // authProviders.Facebook,
           ],
-          callbacks: {
-
-          },
-          signInSuccessUrl: '/',
-          signInFlow: 'popup', 
+          callbacks: {},
+          signInSuccessUrl: "/",
+          signInFlow: "popup",
         }
 
-        ui.start('#firebaseui-auth-container', config)
+        ui.start("#firebaseui-auth-container", config)
       }
     })
-  }
+  },
 }
 </script>

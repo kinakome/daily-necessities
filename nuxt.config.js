@@ -1,62 +1,58 @@
-require('dotenv').config()
+require("dotenv").config()
 
 module.exports = {
   // mode: 'universal',
-  mode: 'spa',
+  mode: "spa",
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: 'Daily Necessities',
+    title: "Daily Necessities",
     // title: process.env.npm_package_name || '',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { charset: "utf-8" },
+      {
+        name: "viewport",
+        content:
+          "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no",
+      },
+      {
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || "",
+      },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   router: {
-    middleware: ['authenticated']
+    middleware: ["authenticated"],
   },
   plugins: ["@/plugins/firebase"],
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#fff" },
   /*
-  ** Global CSS
-  */
-  css: [
-  '~/assets/style/app.scss',
-  'firebaseui/dist/firebaseui.css'
-],
+   ** Global CSS
+   */
+  css: ["~/assets/style/app.scss", "firebaseui/dist/firebaseui.css"],
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
-    { src: '~/plugins/vue-loading-template.js', ssr: false },
-    { src: '~/plugins/vue-touch.js'},
-    { src: '~/plugins/leaflet.js', ssr: false }
+    { src: "~/plugins/vue-loading-template.js", ssr: false },
+    { src: "~/plugins/vue-touch.js" },
+    { src: "~/plugins/leaflet.js", ssr: false },
   ],
   /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-  ],
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [],
   /*
-  ** Nuxt.js modules
-  */
-  modules: [
-    '@nuxtjs/proxy',
-    '@nuxtjs/dotenv',
-    'nuxt-leaflet'
-  ],
-  buildModules: [
-    '@nuxtjs/pwa',
-  ],
+   ** Nuxt.js modules
+   */
+  modules: ["@nuxtjs/proxy", "@nuxtjs/dotenv", "nuxt-leaflet"],
+  buildModules: ["@nuxtjs/pwa"],
   env: {
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
@@ -64,45 +60,37 @@ module.exports = {
     FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
     FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
     GURUNAVI_API_KEY: process.env.GURUNAVI_API_KEY,
-    SEARCH_CAFE_LIST: process.env.SEARCH_CAFE_LIST 
+    SEARCH_CAFE_LIST: process.env.SEARCH_CAFE_LIST,
   },
   manifest: {
     name: "Daily Necessities",
-    lang: 'ja'
+    lang: "ja",
   },
   // fontのimport
-  modules: [['nuxt-webfontloader']],
+  modules: [["nuxt-webfontloader"]],
   webfontloader: {
     google: {
-      families: ['Roboto:400,500,700,900'],
-      families: ['Noto+Sans+JP:400,500,700,900']
-    }
+      families: ["Roboto:400,500,700,900"],
+      families: ["Noto+Sans+JP:400,500,700,900"],
+    },
   },
   // setting axios
-  modules: [
-    '@nuxtjs/axios',
-  ],
-  axios: {
-  },
+  modules: ["@nuxtjs/axios"],
+  axios: {},
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
-    
+     ** You can extend webpack config here
+     */
+
     babel: {
       presets({ isServer }) {
-        const targets = isServer ? { node: 'current' } : { ie: 11 }
-        return [
-          [
-            require.resolve('@nuxt/babel-preset-app'), { targets },
-          ]
-        ]
-      }
+        const targets = isServer ? { node: "current" } : { ie: 11 }
+        return [[require.resolve("@nuxt/babel-preset-app"), { targets }]]
+      },
     },
-    extend (config, ctx) {
-    }
-  }
+    extend(config, ctx) {},
+  },
 }

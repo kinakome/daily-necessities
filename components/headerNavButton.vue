@@ -1,126 +1,155 @@
 <template>
-  <div @mouseover="mouseOverAction" @mouseleave="mouseLemoveAction" @click="clickAction" 
-  :class="{selected: url==$store.state.currentPath, 'header-nav-button': true}" v-show='showButton'>
+  <div
+    v-show="showButton"
+    :class="{
+      selected: url == $store.state.currentPath,
+      'header-nav-button': true,
+    }"
+    @mouseover="mouseOverAction"
+    @mouseleave="mouseLemoveAction"
+    @click="clickAction"
+  >
     <transition name="toggle" mode="out-in">
-      <nuxt-link :to="url" v-if="showTitle" key="title">{{ title }}</nuxt-link>
-      <nuxt-link :to="url" v-else key="explanation" class="explanation">{{ explanation }}</nuxt-link>
-    </transition>	
+      <nuxt-link v-if="showTitle" key="title" :to="url">
+        {{ title }}
+      </nuxt-link>
+      <nuxt-link v-else key="explanation" :to="url" class="explanation">
+        {{ explanation }}
+      </nuxt-link>
+    </transition>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex"
 
 export default {
-  mounted() {
-    window.addEventListener('resize', this.handleResize)
-    if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
-      this.showButton = false
-      this.$store.commit('updateButtonStatus', false)
-    }else{
-      this.showButton = true
-    }
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize)
-  },
   props: {
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     explanation: {
       type: String,
-      default: ''
+      default: "",
     },
     url: {
       type: String,
-      default: '/'
-    }
+      default: "/",
+    },
   },
-  data(){
+  data() {
     return {
       showTitle: true,
       open: false,
       showButton: true,
-      whindow: window.innerWidth
+      whindow: window.innerWidth,
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.handleResize)
+    if (window.innerWidth <= 720 && this.url != this.$store.state.currentPath) {
+      this.showButton = false
+      this.$store.commit("updateButtonStatus", false)
+    } else {
+      this.showButton = true
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize)
   },
   methods: {
     mouseOverAction() {
-      if(window.innerWidth > 720){
+      if (window.innerWidth > 720) {
         this.showTitle = false
       }
     },
     mouseLemoveAction() {
-      if(window.innerWidth > 720){
+      if (window.innerWidth > 720) {
         this.showTitle = true
       }
     },
     //クリック時storeのパスを上書き
     clickAction() {
-      if(window.innerWidth <= 720){
-        if(this.url == this.$store.state.currentPath && this.open == false){
-          this.$parent.$data.pStyle.height = '110px'
+      if (window.innerWidth <= 720) {
+        if (this.url == this.$store.state.currentPath && this.open == false) {
+          this.$parent.$data.pStyle.height = "110px"
           // this.$parent.$data.pStyle.height = '160px'
           this.open = true
-          this.$store.commit('updateButtonStatus', true)
-        }else if(this.url == this.$store.state.currentPath && this.open == true){
-          this.$parent.$data.pStyle.height = '60px'
+          this.$store.commit("updateButtonStatus", true)
+        } else if (
+          this.url == this.$store.state.currentPath &&
+          this.open == true
+        ) {
+          this.$parent.$data.pStyle.height = "60px"
           this.open = false
-          this.$store.commit('updateButtonStatus', false)
-        }else{
+          this.$store.commit("updateButtonStatus", false)
+        } else {
           window.scrollTo({
             top: 0,
-            behavior: 'smooth'
-          });
-          this.$store.commit('updatePath', this.url)
-          this.$store.commit('updateButtonStatus', false)
-          this.$parent.$data.pStyle.height = '60px'
+            behavior: "smooth",
+          })
+          this.$store.commit("updatePath", this.url)
+          this.$store.commit("updateButtonStatus", false)
+          this.$parent.$data.pStyle.height = "60px"
           this.open = false
         }
-      }else{
+      } else {
         window.scrollTo({
           top: 0,
-          behavior: 'smooth'
-        });
-        this.$store.commit('updatePath', this.url)
+          behavior: "smooth",
+        })
+        this.$store.commit("updatePath", this.url)
       }
     },
     handleResize() {
       // windowsサイズ変更を検知
-      this.window = window.innerWidth;
-      if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
+      this.window = window.innerWidth
+      if (
+        window.innerWidth <= 720 &&
+        this.url != this.$store.state.currentPath
+      ) {
         this.showButton = false
-      }else{
+      } else {
         this.showButton = true
       }
     },
   },
   computed: {
-    ...mapGetters(['buttonStatus']),
-    ...mapGetters(['currentPath'])
+    ...mapGetters(["buttonStatus"]),
+    ...mapGetters(["currentPath"]),
   },
   watch: {
     buttonStatus: function (newStatus, oldStatus) {
-      if(window.innerWidth <= 720 && this.url != this.$store.state.currentPath){
+      if (
+        window.innerWidth <= 720 &&
+        this.url != this.$store.state.currentPath
+      ) {
         this.showButton = newStatus
       }
     },
-    currentPath: function(newStatus, oldStatus) {
-      if(window.innerWidth <= 720 && this.url != newStatus && newStatus == "/signIn"){
+    currentPath: function (newStatus, oldStatus) {
+      if (
+        window.innerWidth <= 720 &&
+        this.url != newStatus &&
+        newStatus == "/signIn"
+      ) {
         this.showButton = false
-      }else if(window.innerWidth <= 720 && this.url == newStatus && newStatus == "/signIn"){
+      } else if (
+        window.innerWidth <= 720 &&
+        this.url == newStatus &&
+        newStatus == "/signIn"
+      ) {
         this.showButton = true
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
 @import "~assets/style/app.scss";
-.header-nav-button{
+.header-nav-button {
   text-align: center;
   height: 60px;
   width: 49%;
@@ -147,29 +176,34 @@ export default {
     }
   }
 
-  a:link, a:visited, a:hover, a:active {
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
     color: $white;
   }
 
-  .explanation{
+  .explanation {
     padding-top: 17px;
     font-size: 23px;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
     font-weight: 700;
   }
 }
 
-.selected{
+.selected {
   background-color: $gray;
 }
 
 //transition
-.toggle-enter-active, .toggle-leave-active {
+.toggle-enter-active,
+.toggle-leave-active {
   transition: opacity 0.2s;
   z-index: 2;
 }
 
-.toggle-enter, .toggle-leave-to {
+.toggle-enter,
+.toggle-leave-to {
   opacity: 0;
   z-index: 2;
 }
@@ -183,7 +217,7 @@ export default {
   bottom: -100%;
   left: 0;
   background-color: $black;
-  transition: .3s;
+  transition: 0.3s;
   z-index: -1;
   @include mobile {
     display: none;
@@ -193,5 +227,4 @@ export default {
 .header-nav-button:hover:before {
   bottom: 0;
 }
-
 </style>

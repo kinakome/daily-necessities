@@ -1,13 +1,13 @@
-import { auth } from '~/plugins/firebase'
+import { auth } from "~/plugins/firebase"
 
 export const state = () => ({
   status: "",
   token: "",
-  username: ""
+  username: "",
 })
 
 export const getters = {
-  isLoggedIn: state =>  state.status === "loggedIn"
+  isLoggedIn: (state) => state.status === "loggedIn",
 }
 
 export const actions = {
@@ -19,11 +19,11 @@ export const actions = {
       commit("logout")
     })
   },
-  nuxtClientInit ( commit, state, dispatch ){
+  nuxtClientInit(commit, state, dispatch) {
     if (localStorage.accessToken && token == "") {
-      commit('setToken', localStorage.token)
+      commit("setToken", localStorage.token)
     }
-  }
+  },
 }
 
 export const mutations = {
@@ -38,5 +38,5 @@ export const mutations = {
   setToken(state, token) {
     state.status = "loggedIn"
     state.token = token
-  }
+  },
 }

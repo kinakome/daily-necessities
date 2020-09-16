@@ -1,12 +1,12 @@
-const express = require('express')
-const consola = require('consola')
-const { Nuxt, Builder } = require('nuxt')
+const express = require("express")
+const consola = require("consola")
+const { Nuxt, Builder } = require("nuxt")
 const app = express()
-const https = require('https')
-const fs = require('fs')
+const https = require("https")
+const fs = require("fs")
 
 // Import and Set Nuxt.js options
-const config = require('../../nuxt.config.js')
+const config = require("../../nuxt.config.js")
 
 async function start() {
   // Init Nuxt.js
@@ -17,14 +17,14 @@ async function start() {
   try {
     const builder = new Builder(nuxt)
     await builder.build()
-  } catch(error) {
+  } catch (error) {
     console.error(error)
     return false
   }
 
   // https config
   const https_options = {
-    key : fs.readFileSync(`${__dirname}/localhost-key.pem`),
+    key: fs.readFileSync(`${__dirname}/localhost-key.pem`),
     cert: fs.readFileSync(`${__dirname}/localhost.pem`),
   }
 
@@ -35,7 +35,7 @@ async function start() {
   https.createServer(https_options, app).listen(port, host)
   consola.ready({
     message: `Server listening on https://${host}:${port}`,
-    badge: true
+    badge: true,
   })
 }
 start()

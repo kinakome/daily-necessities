@@ -1,43 +1,47 @@
 <template>
-  <div class="container" v-if='!reloadFlg'>
-    <!-- storeからトップ画面に表示するウィジェット名を受け取り描画 -->
+  <div v-if="!reloadFlg" class="container">
     <div v-for="(widget, index) in $store.state.widgetList" :key="index" class="widget">
         <compnent :is=widget>
         </compnent>
     </div>
-    <div class="widget preparation">準備中</div>
+    <div class="widget preparation">
+      準備中
+    </div>
   </div>
 </template>
 
 <script>
-import TrainInfo from '~/components/widgets/trainInfo.vue'
-import LunchLibrary from '~/components/widgets/lunchLibrary.vue'
-import CafeList from '~/components/widgets/cafeList.vue'
+import TrainInfo from "~/components/widgets/trainInfo.vue"
+import LunchLibrary from "~/components/widgets/lunchLibrary.vue"
+import CafeList from "~/components/widgets/cafeList.vue"
 
 export default {
   components: {
     TrainInfo,
     LunchLibrary,
-    CafeList
+    CafeList,
   },
   data() {
     return {
-      reloadFlg: false
+      reloadFlg: false,
     }
   },
   computed: {
     getLocationReload() {
-      return this.$store.getters['locationReload']
+      return this.$store.getters["locationReload"]
     },
   },
   watch: {
     getLocationReload(newStatus) {
-      this.center = [this.$store.state.location.latitude, this.$store.state.location.longitude]
+      this.center = [
+        this.$store.state.location.latitude,
+        this.$store.state.location.longitude,
+      ]
       this.reloadFlg = newStatus
       console.log(this.reloadFlg)
-      this.$store.commit('updateLocationReload', false)
-    }
-  }
+      this.$store.commit("updateLocationReload", false)
+    },
+  },
 }
 </script>
 
@@ -50,7 +54,7 @@ export default {
   width: 100%;
   display: flex;
   /* justify-content: space-between; */
-	align-items: center;
+  align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -62,15 +66,13 @@ export default {
     width: 600px;
     height: 280px;
     margin-bottom: 30px;
-    box-shadow: 0 0 5px #D2D2D2;
+    box-shadow: 0 0 5px #d2d2d2;
     @include mobile {
       width: 100%;
     }
   }
-  .preparation{
+  .preparation {
     padding: 20px;
   }
 }
-
-
 </style>
