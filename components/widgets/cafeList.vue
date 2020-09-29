@@ -53,7 +53,6 @@ export default {
       if (this.load) {
         this.cafeGroupList = newStatus
         this.cafeList = cafeList
-        console.log(this.cafeList)
       }
       if (cafeList.length != 0) {
         this.load = false

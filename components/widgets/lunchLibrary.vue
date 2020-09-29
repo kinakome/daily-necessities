@@ -100,7 +100,6 @@ export default {
       if (restaurant.length != 0) {
         this.load = false
       }
-      // this.load = false
       return this.showRestaurant
     },
   },
@@ -126,8 +125,8 @@ export default {
     },
     selectRight() {
       const showRest = this.hiddenRestaurant.pop()
-      this.showRestaurant.unshift(showRest)
       const removeRest = this.showRestaurant.pop()
+      this.showRestaurant.unshift(showRest)
       this.hiddenRestaurant.unshift(removeRest)
     },
   },
@@ -394,19 +393,16 @@ export default {
           &-enter {
             &-active {
               opacity: 0;
-              // transition: opacity 0.7s, transform 0.7s;
               transition: opacity 0.7s;
               position: absolute;
               animation: showAnime 0.8s;
             }
             &-to {
               opacity: 1;
-              // transform: translate3d(0, -30px, 0);
             }
           }
           &-leave {
             &-active {
-              // position: absolute;
               transition: opacity 0.4s, transform 0.4s;
             }
             &-to {
@@ -416,7 +412,6 @@ export default {
           }
           &-move {
             transition: transform 0.7s;
-            // animation: moveAnime 0.9s;
           }
         }
         @keyframes showAnime {
@@ -433,11 +428,6 @@ export default {
             transform: scale(1);
           }
         }
-        // @keyframes moveAnime {
-        //   0% {transform: scale(1);}
-        //   50% {transform: scale(1.05);}
-        //   100% {transform: scale(1.1);}
-        // }
       }
     }
     &--footer {

@@ -36,7 +36,6 @@ main {
 }
 
 .page-transition-enter {
-  // transform: translate(-100px, 0);
   transform: translate(0, 200px);
   opacity: 0;
 }
@@ -51,7 +50,6 @@ main {
   opacity: 1;
 }
 .page-transition-leave-to {
-  // transform: translate(100px, 0);
   transform: translate(0, -100px);
   opacity: 0;
 }
