@@ -21,7 +21,6 @@
 
 <script>
 import HeaderNav from "@/components/headerNav.vue"
-import { auth, authProviders } from "~/plugins/firebase"
 
 export default {
   components: {

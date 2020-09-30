@@ -49,7 +49,6 @@ export const actions = {
     const setLongitude = `&longitude=${storeOption.location.longitude}`
     const setLatitude = `&latitude=${storeOption.location.latitude}`
     const setRange = `&range=${storeOption.range}`
-
     const setHit = `&hit_per_page=100`
     const setFreeword = `&freeword=${process.env.SEARCH_CAFE_LIST}`
     const setCondition = `&freeword_condition=2`
